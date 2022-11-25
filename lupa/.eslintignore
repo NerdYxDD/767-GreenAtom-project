@@ -5,4 +5,3 @@ yarn.lock
 *.html
 dist
 webpack.config.js
-setupTests.ts
