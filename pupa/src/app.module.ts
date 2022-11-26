@@ -22,6 +22,7 @@ import { FormForTestModule } from './form_for_test/form_for_test.module';
     QuestionsModule,
     AnswersModule,
     FormForTestModule,
+    CheckingTestModule,
   ],
   controllers: [],
   providers: [],
