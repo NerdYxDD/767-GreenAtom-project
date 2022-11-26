@@ -1,27 +1,44 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Route, Routes } from 'react-router-dom';
-import Layout from './pages/Layout/Layout';
-import LoginPage from './pages/LoginPage/LoginPage';
-import HomePage from './pages/HomePage/HomePage';
-import QuizPage from './pages/QuizPage/QuizPage';
-import QuizListPage from './pages/QuizListPage/QuizListPage';
-import AdminPage from './pages/AdminPage/AdminPage';
-import EditEventModal from './pages/AdminPage/components/EditEventModal/EditEventModal';
 
-const App = () => (
-  <div className='App'>
-    <Routes>
-      <Route index element={<HomePage />} />
-      <Route path='/' element={<Layout />}>
-        <Route path='/login' element={<LoginPage />} />
-        <Route path='/quiz' element={<QuizPage />} />
-        <Route path='/admin' element={<AdminPage />} />
-        <Route path='/quizList' element={<QuizListPage />} />
-        <Route path='/editEventModal' element={<EditEventModal />} />
-        <Route path='/adminPage' element={<AdminPage />} />
-      </Route>
-    </Routes>
-  </div>
-);
+import Layout from './pages/Layout/Layout';
+import HomePage from './pages/HomePage/HomePage';
+
+
+import { adminRoutes, guestRoutes, publicRoutes } from './Routes/routes';
+import { useAppDispatch, useAppSelector } from './redux/hooks/redux.hooks';
+import { guestSelector } from './redux/selectors/guest.selector';
+import { getAdminProfile } from './redux/reducers/Admin/admin.requests';
+import { adminSelector } from './redux/selectors/admin.selector';
+
+const App = () => {
+  const dispatch = useAppDispatch();
+
+  const { authorized } = useAppSelector(guestSelector);
+  const { user } = useAppSelector(adminSelector);
+
+  useEffect(() => {
+    dispatch(getAdminProfile())
+  }, [])
+
+  return (
+    <div className='App'>
+      <Routes>
+        <Route index element={ <HomePage/> }/>
+        <Route path='/' element={ <Layout/> }>
+          {!authorized && publicRoutes.map((one) => (
+            <Route key={ one.path } path={ one.path } element={ one.element }/>
+          )) }
+          {authorized && !user.id && guestRoutes.map((one) => (
+            <Route key={ one.path } path={ one.path } element={ one.element }/>
+          )) }
+          {authorized && !user.id && adminRoutes.map((one) => (
+            <Route key={ one.path } path={ one.path } element={ one.element }/>
+          )) }
+        </Route>
+      </Routes>
+    </div>
+  );
+}
 
 export default App;
