@@ -1,14 +1,7 @@
 import axios, { AxiosPromise } from 'axios';
 import { AccessKey, RequestURLs } from '../const';
 
-interface CreateGuestRbo {
-  email: string;
-  username: string;
-}
-
-interface CreateGuestDto {
-  access_token: string;
-}
+import { CreateGuestDto, CreateGuestRbo } from '../../types/guest';
 
 export const createGuest = async (
   rbo: CreateGuestRbo
