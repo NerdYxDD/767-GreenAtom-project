@@ -6,6 +6,7 @@ import HomePage from './pages/HomePage/HomePage';
 import QuizPage from './pages/QuizPage/QuizPage';
 import QuizListPage from './pages/QuizListPage/QuizListPage';
 import AdminPage from './pages/AdminPage/AdminPage';
+import EditEventModal from './pages/AdminPage/components/EditEventModal/EditEventModal';
 
 const App = () => (
   <div className='App'>
@@ -16,6 +17,7 @@ const App = () => (
         <Route path='/quiz' element={<QuizPage />} />
         <Route path='/admin' element={<AdminPage />} />
         <Route path='/quizList' element={<QuizListPage />} />
+        <Route path='/editEventModal' element={<EditEventModal />} />
         <Route path='/adminPage' element={<AdminPage />} />
       </Route>
     </Routes>
