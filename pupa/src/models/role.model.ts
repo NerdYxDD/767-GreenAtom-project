@@ -12,6 +12,8 @@ import { Admin } from './Admin.model';
 
 @Table({
   tableName: 'role',
+  createdAt: false,
+  updatedAt: false,
 })
 export class Role extends Model {
   @PrimaryKey

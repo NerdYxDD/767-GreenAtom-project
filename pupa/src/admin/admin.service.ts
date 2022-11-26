@@ -13,6 +13,7 @@ import {
   FullRole,
   NewAdmin,
 } from '../dtos/admin.dto';
+import { where } from 'sequelize';
 
 @Injectable()
 export class AdminService {

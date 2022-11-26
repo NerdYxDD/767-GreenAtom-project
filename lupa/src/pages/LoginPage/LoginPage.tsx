@@ -1,7 +1,12 @@
-import { Button, Checkbox, Input } from 'antd';
 import React, { useMemo, useState } from 'react';
+import { Button, Checkbox, Input } from 'antd';
+
+import { guestLoginRequest } from '../../redux/reducers/Guest/guest.requests';
+import { useAppDispatch } from '../../redux/hooks/redux.hooks';
+
 // @ts-ignore
 import styles from './LoginPage.module.scss';
+
 
 const emailCheck = /\S+@\S+\.\S+/;
 
@@ -13,6 +18,8 @@ interface UserInfo {
 }
 
 const LoginPage = () => {
+  const dispatch = useAppDispatch();
+
   const [userInfo, setUserInfo] = useState<UserInfo>({
     name: '',
     email: '',
@@ -29,6 +36,10 @@ const LoginPage = () => {
 
   const changeHandler = (type: keyof UserInfo, value: UserInfo[typeof type]) =>
     setUserInfo((prevState) => ({ ...prevState, [type]: value }));
+
+  const login = () => {
+    dispatch(guestLoginRequest({ username: userInfo.name, email: userInfo.email }))
+  }
 
   return (
     <div className={styles.LoginContainer}>
@@ -68,7 +79,7 @@ const LoginPage = () => {
         </Checkbox>
       </div>
 
-      <Button disabled={!isValid} type='default'>
+      <Button onClick={login} disabled={!isValid} type='default'>
         Отправить
       </Button>
     </div>
