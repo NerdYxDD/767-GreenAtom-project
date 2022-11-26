@@ -1,7 +1,6 @@
 import {
   AllowNull,
   Column,
-  HasMany,
   IsUUID,
   Model,
   PrimaryKey,
