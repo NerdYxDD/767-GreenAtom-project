@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
 
-import { Guest } from '../../models/guest.model';
+import { Guest } from '../models/guest.model';
 import { FullGuest, NewGuest } from '../dtos/guest.dto';
 
 import { v4 as uuidv4 } from 'uuid';

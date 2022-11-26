@@ -6,9 +6,9 @@ import { ConfigService } from '@nestjs/config';
 
 import { AuthService } from './auth.service';
 
-import { Admin } from '../../models/Admin.model';
-import { Role } from '../../models/role.model';
-import { Guest } from '../../models/guest.model';
+import { Admin } from '../models/Admin.model';
+import { Role } from '../models/role.model';
+import { Guest } from '../models/guest.model';
 import { JwtStrategy } from './jwt.strategy';
 
 @Module({
