@@ -31,7 +31,10 @@ export class AdminController {
 
   @UseGuards(JwtAuthGuard)
   @Post('/create')
-  create(@Body() admin: NewAdmin, user: JWTPayload): Promise<FullAdmin> {
+  create(
+    @Body() admin: NewAdmin,
+    { user }: { user: JWTPayload },
+  ): Promise<FullAdmin> {
     permissionChecker(user?.roleId);
 
     const { email, password, username, lastName, firstName } = admin;
