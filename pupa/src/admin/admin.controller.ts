@@ -33,7 +33,7 @@ export class AdminController {
   @Post('/create')
   create(
     @Body() admin: NewAdmin,
-    { user }: { user: JWTPayload },
+    @Request() { user }: { user: JWTPayload },
   ): Promise<FullAdmin> {
     permissionChecker(user?.roleId);
 
