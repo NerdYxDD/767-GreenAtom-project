@@ -1,10 +1,8 @@
 import {
   Body,
   Controller,
-  Get,
   HttpException,
   HttpStatus,
-  Param,
   Post,
   Request,
   UseGuards,
@@ -34,7 +32,6 @@ export class QuizController {
     if (!title) {
       throw new HttpException('Название должно быть', HttpStatus.BAD_REQUEST);
     }
-
     const event = await this.quizService.findEvent(eventId);
     if (!event) {
       throw new HttpException('Не валидное событие', HttpStatus.BAD_REQUEST);
