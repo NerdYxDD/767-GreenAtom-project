@@ -28,7 +28,7 @@ export class EventsController {
   ): Promise<FullEvent> {
     if (!user?.roleId) {
       throw new HttpException(
-        'Нету доступа управлять админами',
+        'Нету доступа управлять событиями',
         HttpStatus.FORBIDDEN,
       );
     }
@@ -43,7 +43,7 @@ export class EventsController {
   ): Promise<FullEvent[]> {
     if (!user?.roleId) {
       throw new HttpException(
-        'Нету доступа управлять админами',
+        'Нету доступа управлять событиями',
         HttpStatus.FORBIDDEN,
       );
     }
