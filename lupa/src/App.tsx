@@ -4,6 +4,7 @@ import Layout from './pages/Layout/Layout';
 import LoginPage from './pages/LoginPage/LoginPage';
 import HomePage from './pages/HomePage/HomePage';
 import QuizPage from './pages/QuizPage/QuizPage';
+import QuizListPage from './pages/QuizListPage/QuizListPage';
 
 const App = () => (
   <div className='App'>
@@ -12,6 +13,7 @@ const App = () => (
         <Route index element={<HomePage />} />
         <Route path='/login' element={<LoginPage />} />
         <Route path='/quiz' element={<QuizPage />} />
+        <Route path='/quiz_list' element={<QuizListPage />} />
       </Route>
     </Routes>
   </div>

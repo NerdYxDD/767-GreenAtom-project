@@ -1,0 +1,14 @@
+.Card {
+  width: 300px;
+  border: 1px black solid;
+}
+
+.Img {
+  width: 86px;
+  height: 86px;
+}
+
+.CardWrapper {
+  display: flex;
+  gap: 8px;
+}
