@@ -1,6 +1,8 @@
 import {
   AllowNull,
+  BelongsTo,
   Column,
+  ForeignKey,
   HasMany,
   IsUUID,
   Model,
@@ -9,12 +11,13 @@ import {
   Unique,
 } from 'sequelize-typescript';
 
+import { Admin } from './Admin.model';
 import { GuestEvent } from './guest_event.model';
 
 @Table({
-  tableName: 'guest',
+  tableName: 'room_event',
 })
-export class Guest extends Model {
+export class RoomEvent extends Model {
   @IsUUID(4)
   @PrimaryKey
   @Unique
@@ -24,11 +27,18 @@ export class Guest extends Model {
 
   @Unique
   @Column
-  email: string;
+  code: string;
 
   @Column
-  username: string;
+  title: string;
+
+  @BelongsTo(() => Admin)
+  owner: Admin;
 
   @HasMany(() => GuestEvent)
-  event: GuestEvent;
+  guests: GuestEvent;
+
+  @ForeignKey(() => Admin)
+  @Column
+  ownerId: string;
 }

@@ -7,9 +7,14 @@ import { GuestController } from './guest.controller';
 import { GuestService } from './guest.service';
 
 import { Guest } from '../models/guest.model';
+import { GuestEvent } from '../models/guest_event.model';
+import { RoomEvent } from '../models/event.model';
 
 @Module({
-  imports: [SequelizeModule.forFeature([Guest]), AuthModule],
+  imports: [
+    SequelizeModule.forFeature([Guest, RoomEvent, GuestEvent]),
+    AuthModule,
+  ],
   controllers: [GuestController],
   providers: [GuestService],
 })
