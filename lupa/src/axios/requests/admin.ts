@@ -1,25 +1,29 @@
-import axios from 'axios';
+import axios, { AxiosPromise } from 'axios';
 import { RequestURLs } from '../const';
+import { AxiosData } from '../../types/types';
+import {
+  CreateAdminDto,
+  CreateAdminRbo,
+  LoginAdminDto,
+  LoginAdminRbo,
+} from '../../types/admin';
 
-interface CreateAdminRbo {
-  email: string;
-  firstName: string;
-  lastName: string;
-  password: string;
-  username: string;
-}
-
-export const createAdmin = async (rbo: CreateAdminRbo) => {
-  const { data } = await axios.post(RequestURLs.admin.create, rbo);
+export const createAdmin = async (
+  rbo: CreateAdminRbo
+): Promise<CreateAdminDto> => {
+  const { data } = await axios.post<
+    AxiosPromise<CreateAdminRbo>,
+    Promise<AxiosData<CreateAdminDto>>
+  >(RequestURLs.admin.create, rbo);
   return data;
 };
 
-interface LoginAdminRbo {
-  password: string;
-  email: string;
-}
-
-export const loginAdmin = async (rbo: LoginAdminRbo) => {
-  const { data } = await axios.post(RequestURLs.admin.login, rbo);
+export const loginAdmin = async (
+  rbo: LoginAdminRbo
+): Promise<LoginAdminDto> => {
+  const { data } = await axios.post<
+    AxiosPromise<LoginAdminRbo>,
+    Promise<AxiosData<LoginAdminDto>>
+  >(RequestURLs.admin.login, rbo);
   return data;
 };
