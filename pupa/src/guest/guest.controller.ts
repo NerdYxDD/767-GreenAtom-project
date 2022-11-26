@@ -32,8 +32,19 @@ export class GuestController {
     const oldGuest = await this.guestService.findGuest(guest.email);
 
     if (!oldGuest) {
-      resGuest = await this.guestService.newGuest(guest);
-    } else resGuest = { ...oldGuest };
+      const fromDB = await this.guestService.newGuest(guest);
+      resGuest = {
+        email: fromDB.email,
+        username: fromDB.username,
+        id: fromDB.id,
+      };
+    } else {
+      resGuest = {
+        email: oldGuest.email,
+        username: oldGuest.username,
+        id: oldGuest.id,
+      };
+    }
 
     return this.authService.newGuestToken({ ...resGuest });
   }

@@ -5,9 +5,16 @@ import dattebyo from './dattebyo/dattebyo';
 
 import { GuestModule } from './guest/guest.module';
 import { AdminModule } from './admin/admin.module';
+import { EventsModule } from './events/events.module';
 
 @Module({
-  imports: [dattebyo, ConfigModule.forRoot(), GuestModule, AdminModule],
+  imports: [
+    dattebyo,
+    ConfigModule.forRoot(),
+    GuestModule,
+    AdminModule,
+    EventsModule,
+  ],
   controllers: [],
   providers: [],
 })

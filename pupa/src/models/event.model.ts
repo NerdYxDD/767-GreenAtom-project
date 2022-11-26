@@ -13,6 +13,7 @@ import {
 
 import { Admin } from './Admin.model';
 import { GuestEvent } from './guest_event.model';
+import { Quiz } from './quiz.model';
 
 @Table({
   tableName: 'room_event',
@@ -37,6 +38,9 @@ export class RoomEvent extends Model {
 
   @HasMany(() => GuestEvent)
   guests: GuestEvent;
+
+  @HasMany(() => Quiz)
+  quiz: Quiz;
 
   @ForeignKey(() => Admin)
   @Column
