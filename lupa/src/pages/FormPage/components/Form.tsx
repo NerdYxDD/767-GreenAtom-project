@@ -1,95 +1,94 @@
-import React, { useState } from 'react'
-import { Checkbox, Button, Input  } from 'antd';
+import React, { useState, useMemo } from 'react';
+import { Checkbox, Button, Input } from 'antd';
 import type { CheckboxChangeEvent } from 'antd/es/checkbox';
 // @ts-ignore
-import styles from './Form.module.scss'
-
-
+import styles from './Form.module.scss';
 
 export const Form: React.FC = () => {
-    const [name, setName] = useState<string>('')
-    const [email, setEmail] = useState<string>('')
-    const [phone, setPhone] = useState<string>('')
+  const [userInfo, setUserInfo] = useState({
+    name: '',
+    phone: '',
+    email: '',
+  });
 
-    const changeNameHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
-         setName(event.target.value)
-    }
+  console.log(userInfo);
 
-    const changeEmailHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setEmail(event.target.value)
-    }
+  const isValid = useMemo(
+    (): boolean =>
+      userInfo.name !== '' && userInfo.email !== '' && userInfo.phone !== '',
+    [userInfo]
+  );
 
-    const changePhoneNumberHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setPhone(event.target.value)
-    }
+  console.log('/////', isValid);
 
-    const changeCheckboxHandler = (event: CheckboxChangeEvent) => {
-        event.target.checked
-    }
+  // const changeHandler = (name: string, value: string) => {
+  //   setUserInfo((prevState) => ({ ...prevState, name: value }));
+  // };
 
-    return (
-        <div className={styles.Box}>
+  const changeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setUserInfo({ ...userInfo, [event.target.id]: event.target.value });
+  };
 
-            <span className={styles.Span}>
-                Чтобы узнать, какие востребованные профессии будущего вам подходят больше всего, оставьте ваши контактные данные
-            </span>
+  const changeCheckboxHandler = (event: CheckboxChangeEvent) => {
+    event.target.checked;
+  };
 
-            <br/>
-            <br/>
+  return (
+    <div className={styles.Box}>
+      <span className={styles.Span}>
+        Чтобы узнать, какие востребованные профессии будущего вам подходят
+        больше всего, оставьте ваши контактные данные
+      </span>
 
-            <label htmlFor='name' className={styles.Label}>
-                Введите свое имя
-            </label>
+      <br />
+      <br />
 
-            <Input
-                size='middle'
-                className={styles.InputContainer}
-                onChange={changeNameHandler}
-                value={name}
-                type='text'
-                id='name'
-                required
-            />
+      <label htmlFor='name' className={styles.Label}>
+        Введите свое имя
+      </label>
 
+      <Input
+        size='middle'
+        className={styles.InputContainer}
+        onChange={changeHandler}
+        type='text'
+        id='name'
+        required
+      />
 
-            <label htmlFor='email' className={styles.Label}>
-                Введите свой email
-            </label>
+      <label htmlFor='email' className={styles.Label}>
+        Введите свой email
+      </label>
 
-            <Input
-                size='middle'
-                className={styles.InputContainer}
-                onChange={changeEmailHandler}
-                value={email}
-                type='email'
-                id='email'
-                required
-            />
+      <Input
+        size='middle'
+        className={styles.InputContainer}
+        onChange={changeHandler}
+        type='email'
+        id='email'
+        required
+      />
 
-            <label htmlFor='phone' className={styles.Label}>
-                Введите номер телефона
-            </label>
+      <label htmlFor='phone' className={styles.Label}>
+        Введите номер телефона
+      </label>
 
-            <Input
-                size='middle'
-                className={styles.InputContainer}
-                onChange={changePhoneNumberHandler}
-                value={phone}
-                type='tel'
-                id='phone'
-                required
-            />
+      <Input
+        size='middle'
+        className={styles.InputContainer}
+        onChange={changeHandler}
+        type='tel'
+        id='phone'
+        required
+      />
 
-            <Checkbox onChange={changeCheckboxHandler} className={styles.Checkbox}>
-                Я согласен с условиями обработки персональных данных
-            </Checkbox>
+      <Checkbox onChange={changeCheckboxHandler} className={styles.Checkbox}>
+        Я согласен с условиями обработки персональных данных
+      </Checkbox>
 
-            <Button
-                type='primary'
-                className={styles.Button}>
-                Отправить
-            </Button>
-
-        </div>
-    )
-}
+      <Button disabled={!isValid} type='default' className={styles.Button}>
+        Отправить
+      </Button>
+    </div>
+  );
+};
