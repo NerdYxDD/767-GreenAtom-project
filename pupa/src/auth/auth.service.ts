@@ -1,7 +1,9 @@
 import { JwtService } from '@nestjs/jwt';
-import { Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { FullGuest } from '../dtos/guest.dto';
+import { AdminWithoutPassword, FullAdmin, FullRole } from '../dtos/admin.dto';
+import { checkPassword } from '../admin/admin.utils';
 
 @Injectable()
 export class AuthService {
@@ -10,29 +12,34 @@ export class AuthService {
     private configService: ConfigService,
   ) {}
 
-  // async validateUser(
-  //   user: LoginUserFullDto,
-  //   email: string,
-  //   pass: string,
-  // ): Promise<LoginUserWithoutPasswordDto | null> {
-  //   const coincidePass = await checkPassword(pass, user.password);
-  //   if (user && coincidePass) {
-  //     return {
-  //       id: user.id,
-  //       email: user.email,
-  //     };
-  //   }
-  //   throw new HttpException('Wrong password', HttpStatus.UNAUTHORIZED);
-  // }
+  async validateUser(
+    user: FullAdmin,
+    email: string,
+    pass: string,
+  ): Promise<AdminWithoutPassword | null> {
+    const coincidePass = await checkPassword(pass, user.password);
+    if (user && coincidePass) {
+      const { password, ...rest } = user;
+      return rest;
+    }
+    throw new HttpException('Неверный пароль', HttpStatus.UNAUTHORIZED);
+  }
 
-  // async login(user: any) {
-  //   const payload = { username: user.email, sub: user.id };
-  //   return {
-  //     access_token: this.jwtService.sign(payload, {
-  //       secret: this.configService.get('JWT_SECRET_KEY'),
-  //     }),
-  //   };
-  // }
+  async loginAdmin(user: AdminWithoutPassword, role: FullRole) {
+    const { id, username, email } = user;
+    const payload = {
+      username,
+      sub: id,
+      email,
+      roleId: role.id,
+      roleName: role.name,
+    };
+    return {
+      access_token: `Bearer ${this.jwtService.sign(payload, {
+        secret: this.configService.get('JWT_SECRET_KEY'),
+      })}`,
+    };
+  }
 
   async newGuestToken(guest: FullGuest): Promise<{ access_token: string }> {
     const payload = {
