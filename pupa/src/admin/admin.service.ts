@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
 import { v4 as uuidv4 } from 'uuid';
 
@@ -18,8 +18,19 @@ export class AdminService {
     private readonly role: typeof Role,
   ) {}
 
-  create(admin: NewAdmin): Promise<FullAdmin> {
+  async create(admin: NewAdmin): Promise<FullAdmin> {
     const { password, ...rest } = admin;
+    const checkAdmin = await this.admin.findOne({
+      where: { email: rest.email },
+    });
+
+    if (checkAdmin) {
+      throw new HttpException(
+        'Администратор с этим пользователем уже существет',
+        HttpStatus.BAD_REQUEST,
+      );
+    }
+
     return this.admin.create({
       id: uuidv4(),
       password: hashPassword(password),
