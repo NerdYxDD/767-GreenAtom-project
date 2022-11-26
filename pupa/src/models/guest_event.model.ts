@@ -11,7 +11,7 @@ import {
 } from 'sequelize-typescript';
 
 import { Guest } from './guest.model';
-import { Event } from './event.model';
+import { RoomEvent } from './event.model';
 
 @Table({
   tableName: 'guest_event',
@@ -26,11 +26,11 @@ export class GuestEvent extends Model {
 
   @BelongsTo(() => Guest)
   guest: Guest;
-  @BelongsTo(() => Event)
-  event: Event;
+  @BelongsTo(() => RoomEvent)
+  event: RoomEvent;
 
   @ForeignKey(() => Guest)
   guestId: Guest;
-  @ForeignKey(() => Event)
-  eventId: Event;
+  @ForeignKey(() => RoomEvent)
+  eventId: RoomEvent;
 }

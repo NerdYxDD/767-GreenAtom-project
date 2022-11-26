@@ -15,9 +15,9 @@ import { Admin } from './Admin.model';
 import { GuestEvent } from './guest_event.model';
 
 @Table({
-  tableName: 'event',
+  tableName: 'room_event',
 })
-export class Event extends Model {
+export class RoomEvent extends Model {
   @IsUUID(4)
   @PrimaryKey
   @Unique
