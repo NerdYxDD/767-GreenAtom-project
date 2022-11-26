@@ -20,6 +20,7 @@ import {
   NewAdmin,
 } from '../dtos/admin.dto';
 import { JWTPayload } from '../auth/auth.types';
+import { permissionChecker } from '../auth/auth.utils';
 
 @Controller('admin')
 export class AdminController {
@@ -31,12 +32,8 @@ export class AdminController {
   @UseGuards(JwtAuthGuard)
   @Post('/create')
   create(@Body() admin: NewAdmin, user: JWTPayload): Promise<FullAdmin> {
-    if (!user?.roleId) {
-      throw new HttpException(
-        'Нету доступа управлять админами',
-        HttpStatus.FORBIDDEN,
-      );
-    }
+    permissionChecker(user?.roleId);
+
     const { email, password, username, lastName, firstName } = admin;
     if (!email || !password || !username || !lastName || !firstName) {
       throw new HttpException(
@@ -76,12 +73,7 @@ export class AdminController {
   async getEventListeners(
     @Request() { user }: { user: JWTPayload },
   ): Promise<AdminWithoutPassword> {
-    if (!user?.roleId) {
-      throw new HttpException(
-        'Нету доступа управлять админами',
-        HttpStatus.FORBIDDEN,
-      );
-    }
+    permissionChecker(user?.roleId);
     return await this.adminService.findOneAdminWtPass(user.email);
   }
 }

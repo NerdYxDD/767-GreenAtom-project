@@ -13,6 +13,7 @@ import {
   FullRole,
   NewAdmin,
 } from '../dtos/admin.dto';
+import { where } from 'sequelize';
 
 @Injectable()
 export class AdminService {
@@ -58,4 +59,6 @@ export class AdminService {
   async findRole(roleId: number): Promise<FullRole> {
     return await this.role.findOne({ where: { id: roleId } });
   }
+
+ 
 }

@@ -3,7 +3,6 @@ import {
   BelongsTo,
   Column,
   ForeignKey,
-  HasMany,
   IsUUID,
   Model,
   PrimaryKey,
@@ -11,13 +10,13 @@ import {
   Unique,
 } from 'sequelize-typescript';
 
+import { Guest } from './guest.model';
 import { Quiz } from './quiz.model';
-import { Answers } from './answers.model';
 
 @Table({
-  tableName: 'questions',
+  tableName: 'guest_event',
 })
-export class Questions extends Model {
+export class GuestQuiz extends Model {
   @IsUUID(4)
   @PrimaryKey
   @Unique
@@ -25,18 +24,13 @@ export class Questions extends Model {
   @Column
   id: string;
 
-  @Unique
-  @Column
-  text: string;
-
-  @HasMany(() => Answers)
-  answers: Answers;
-
+  @BelongsTo(() => Guest)
+  guest: Guest;
   @BelongsTo(() => Quiz)
   quiz: Quiz;
 
+  @ForeignKey(() => Guest)
+  guestId: Guest;
   @ForeignKey(() => Quiz)
-  @AllowNull(false)
-  @Column
-  quizId: string;
+  quizId: Quiz;
 }

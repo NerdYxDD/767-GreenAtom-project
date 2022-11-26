@@ -3,6 +3,7 @@ import {
   BelongsTo,
   Column,
   ForeignKey,
+  HasMany,
   IsUUID,
   Model,
   PrimaryKey,
@@ -11,6 +12,7 @@ import {
 } from 'sequelize-typescript';
 
 import { RoomEvent } from './event.model';
+import { Questions } from './questions.models';
 
 @Table({
   tableName: 'quiz',
@@ -28,6 +30,9 @@ export class Quiz extends Model {
 
   @BelongsTo(() => RoomEvent)
   event: RoomEvent;
+
+  @HasMany(() => Questions)
+  question: Questions;
 
   @ForeignKey(() => RoomEvent)
   @AllowNull(false)
