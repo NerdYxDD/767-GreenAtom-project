@@ -1,8 +1,10 @@
 import {
   Body,
   Controller,
+  Get,
   HttpException,
   HttpStatus,
+  Param,
   Post,
   Request,
   UseGuards,
@@ -39,5 +41,15 @@ export class QuizController {
     }
 
     return this.quizService.createQuiz(quiz);
+  }
+
+  @UseGuards(JwtAuthGuard)
+  @Get('/:eventId')
+  async getQuizes(
+    @Param('eventId') eventId: string,
+    @Request() { user }: { user: JWTPayload },
+  ): Promise<FullQuiz[]> {
+    permissionChecker(user?.roleId);
+    return await this.quizService.getQuizes(eventId);
   }
 }
