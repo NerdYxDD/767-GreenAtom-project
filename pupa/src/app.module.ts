@@ -1,8 +1,12 @@
 import { Module } from '@nestjs/common';
-import dattebyo from '../dattebyo/dattebyo';
+import { ConfigModule } from '@nestjs/config';
+
+import dattebyo from './dattebyo/dattebyo';
+
+import { GuestModule } from './guest/guest.module';
 
 @Module({
-  imports: [dattebyo],
+  imports: [dattebyo, ConfigModule.forRoot(), GuestModule],
   controllers: [],
   providers: [],
 })

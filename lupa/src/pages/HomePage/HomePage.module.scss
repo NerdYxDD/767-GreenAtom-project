@@ -1,0 +1,150 @@
+.Background {
+  position: absolute;
+  width: 100%;
+  height: 900px;
+  left: 0;
+  top: 0;
+
+  background-color: white;
+}
+
+.GreenAtom {
+  position: relative;
+  width: 100%;
+  //height: 200px;
+  height: 20vh;
+
+  background: #6FB22F; //#003274 2bb909
+  font-family: 'Golos Text VF', sans-serif;
+  text-align: center;
+
+  span {
+    position: relative;
+    //color: black;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 28px;
+  }
+
+}
+
+.Stazhirovka {
+  position: relative;
+  width: 182px;
+  color: whitesmoke;
+
+  border-bottom-right-radius: 10px;
+  border-top-left-radius: 10px;
+
+  background: #2bb909;
+}
+
+.TextBlock {
+  position: relative;
+  width: 182px;
+  height: 84px;
+  left: 10%;
+  top: calc(50% - 52px);
+}
+
+.GreenLabIcon {
+  position: relative;
+  //top: 250px;
+  width: 150px;
+}
+
+.ForLogo {
+  position: relative;
+  width: 170px;
+  height: 56px;
+  float: right;
+  top: -30px; //calc(100% - 28px - 84px);
+
+  border: 2px solid #6FB22F;
+  border-right: 0;
+  border-top-left-radius: 28px;
+  border-bottom-left-radius: 28px;
+
+  background: white;
+
+
+}
+
+.TextBlock1 {
+  position: relative;
+  width: 100%;
+  height: 300px;
+
+  display: flex;
+
+  justify-content: center;
+
+  background: #D3D3D3;
+}
+
+.TextBlock2 {
+  position: relative;
+  width: 100%;
+  height: 200px;
+  top: 0;
+
+  display: flex;
+
+  font-family: 'Golos Text VF', sans-serif;
+
+  justify-content: center;
+
+  background: #6FB22F;
+
+  span {
+    //position: absolute;
+    //text-align: right;
+    font-weight: 700;
+    font-size: 22px;
+    line-height: 24px;
+  }
+
+  span[id='1'] {
+    top: 27px;
+    left: 96px;
+  }
+
+  span[id='2'] {
+    top: 53px;
+    left: 123px;
+  }
+}
+
+.TextBlock3 {
+  position: relative;
+  width: 100%;
+  height: 200px;
+  top: 0;
+
+  display: flex;
+
+  justify-content: center;
+
+  background: #D3D3D3;
+}
+
+.InfoBlocks {
+  position: relative;
+  text-align: center;
+  top: -30px;
+}
+
+.Gradient {
+  position: relative;
+  height: 30px;
+
+  background: linear-gradient(to bottom, #6FB22F, #D3D3D3);
+}
+
+.Image1 {
+  position: relative;
+  height: 190px;
+  top: 10px;
+  right: 10px;
+}
+
