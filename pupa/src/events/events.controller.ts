@@ -2,8 +2,6 @@ import {
   Body,
   Controller,
   Get,
-  HttpException,
-  HttpStatus,
   Param,
   Post,
   Request,
@@ -15,6 +13,7 @@ import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 
 import { JWTPayload } from '../auth/auth.types';
 import { FullEvent } from 'src/dtos/event.dto';
+import { permissionChecker } from '../auth/auth.utils';
 
 @Controller('events')
 export class EventsController {
@@ -26,12 +25,7 @@ export class EventsController {
     @Body() event: FullEvent,
     @Request() user: JWTPayload,
   ): Promise<FullEvent> {
-    if (!user?.roleId) {
-      throw new HttpException(
-        'Нету доступа управлять событиями',
-        HttpStatus.FORBIDDEN,
-      );
-    }
+    permissionChecker(user?.roleId);
     return this.eventService.createEvent(event);
   }
 
@@ -41,12 +35,7 @@ export class EventsController {
     @Param('code') code: string,
     @Request() user: JWTPayload,
   ): Promise<FullEvent[]> {
-    if (!user?.roleId) {
-      throw new HttpException(
-        'Нету доступа управлять событиями',
-        HttpStatus.FORBIDDEN,
-      );
-    }
+    permissionChecker(user?.roleId);
     return this.eventService.getEvent(code);
   }
 }
