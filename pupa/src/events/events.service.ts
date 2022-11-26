@@ -1,9 +1,10 @@
-import { Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { v4 as uuidv4 } from 'uuid';
 
 import { FullEvent } from 'src/dtos/event.dto';
 import { InjectModel } from '@nestjs/sequelize';
 import { RoomEvent } from 'src/models/event.model';
+import { Op } from 'sequelize';
 
 @Injectable()
 export class EventsService {
@@ -23,7 +24,25 @@ export class EventsService {
     return await this.event.create(newEvent);
   }
 
-  async getEvent(code): Promise<FullEvent[]> {
-    return this.event.findAll({ where: { code } });
+  async getEvent(code: string): Promise<FullEvent[]> {
+    return await this.event.findAll({ where: { code } });
+  }
+
+  async getActiveEvent(id: string): Promise<FullEvent[]> {
+    return await this.event.findAll({
+      where: {
+        [Op.and]: [{ id }, { active: true }],
+      },
+    });
+  }
+  async changeStatus(id: string): Promise<FullEvent> {
+    await this.event.update(
+      {
+        active: false,
+      },
+      { where: { id } },
+    );
+
+    return await this.event.findOne({ where: { id } });
   }
 }
