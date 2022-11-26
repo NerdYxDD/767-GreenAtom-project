@@ -59,6 +59,4 @@ export class AdminService {
   async findRole(roleId: number): Promise<FullRole> {
     return await this.role.findOne({ where: { id: roleId } });
   }
-
- 
 }

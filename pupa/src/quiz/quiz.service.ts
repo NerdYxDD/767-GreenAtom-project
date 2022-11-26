@@ -31,8 +31,12 @@ export class QuizService {
     return await this.getAllQuizes(eventId);
   }
 
-  async findEvent(id: string): Promise<FullEvent | null> {
-    return await this.event.findOne({ where: { id } });
+  async findEvent(id: string): Promise<FullQuiz | null> {
+    return await this.quiz.findOne({ where: { id } });
+  }
+
+  async getQuizes(id: string): Promise<FullQuiz[]> {
+    return await this.quiz.findAll({ where: { eventId: id } });
   }
 
   async findQuiz(id: string): Promise<FullQuiz | null> {

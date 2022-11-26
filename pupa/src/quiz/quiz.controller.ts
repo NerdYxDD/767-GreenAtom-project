@@ -1,8 +1,10 @@
 import {
   Body,
   Controller,
+  Get,
   HttpException,
   HttpStatus,
+  Param,
   Post,
   Request,
   UseGuards,
@@ -41,7 +43,6 @@ export class QuizController {
     return this.quizService.createQuiz(quiz);
   }
 
-  // to do take array of answers
   @UseGuards(JwtAuthGuard)
   @Post('/create')
   async passedQuiz(
