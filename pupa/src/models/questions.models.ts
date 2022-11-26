@@ -30,7 +30,7 @@ export class Questions extends Model {
   text: string;
 
   @HasMany(() => Answers)
-  question: Answers;
+  answers: Answers;
 
   @BelongsTo(() => Quiz)
   quiz: Quiz;
