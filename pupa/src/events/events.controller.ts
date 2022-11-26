@@ -1,7 +1,6 @@
 import {
   Body,
   Controller,
-  Delete,
   Get,
   Param,
   Post,
@@ -25,10 +24,10 @@ export class EventsController {
   @Post('/create')
   async createEvent(
     @Body() event: CreateEvent,
-    @Request() user: JWTPayload,
+    @Request() { user }: { user: JWTPayload },
   ): Promise<FullEvent> {
     permissionChecker(user?.roleId);
-    return this.eventService.createEvent(event);
+    return this.eventService.createEvent(event, user.sub);
   }
 
   @UseGuards(JwtAuthGuard)
