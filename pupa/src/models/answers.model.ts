@@ -25,10 +25,6 @@ export class Answers extends Model {
 
   @AllowNull(false)
   @Column
-  questionId: string;
-
-  @AllowNull(false)
-  @Column
   IsRight: boolean;
 
   @AllowNull(false)
@@ -41,5 +37,5 @@ export class Answers extends Model {
   @ForeignKey(() => Questions)
   @AllowNull(false)
   @Column
-  quizId: string;
+  questionId: string;
 }
