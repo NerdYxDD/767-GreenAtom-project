@@ -20,7 +20,7 @@ export class AdminController {
     private readonly authService: AuthService,
   ) {}
 
-  // @UseGuards(JwtAuthGuard)
+  @UseGuards(JwtAuthGuard)
   @Post('/create')
   create(@Body() admin: NewAdmin): Promise<FullAdmin> {
     return this.adminService.create(admin);
