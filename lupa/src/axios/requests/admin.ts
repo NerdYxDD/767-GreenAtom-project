@@ -27,3 +27,11 @@ export const loginAdmin = async (
   >(RequestURLs.admin.login, rbo);
   return data;
 };
+
+export const getProfile = async (): Promise<CreateAdminDto> => {
+  const { data } = await axios.get<
+    void,
+    Promise<AxiosData<CreateAdminDto>>
+    >(RequestURLs.admin.getMyProfile);
+  return data;
+};
