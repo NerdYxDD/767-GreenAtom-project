@@ -23,6 +23,13 @@ export class AdminController {
   @UseGuards(JwtAuthGuard)
   @Post('/create')
   create(@Body() admin: NewAdmin): Promise<FullAdmin> {
+    const { email, password, username, lastName, firstName } = admin;
+    if (!email || !password || !username || !lastName || !firstName) {
+      throw new HttpException(
+        'Все поля должны быть заполнены',
+        HttpStatus.BAD_REQUEST,
+      );
+    }
     return this.adminService.create(admin);
   }
 
