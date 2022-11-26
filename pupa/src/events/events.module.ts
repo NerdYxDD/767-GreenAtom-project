@@ -4,8 +4,8 @@ import { SequelizeModule } from '@nestjs/sequelize';
 import { EventsController } from './events.controller';
 import { EventsService } from './events.service';
 
-import { RoomEvent } from 'src/models/event.model';
-import { Quiz } from '../models/quiz.model';
+import { RoomEvent } from 'models/event.model';
+import { Quiz } from '../../models/quiz.model';
 
 @Module({
   imports: [SequelizeModule.forFeature([RoomEvent, Quiz])],
