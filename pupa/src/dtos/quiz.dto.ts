@@ -6,3 +6,4 @@ class Quiz {
 
 export type FullQuiz = Quiz;
 export type QuizWtId = Omit<Quiz, 'id'>;
+export type PassedQuiz = Pick<Quiz, 'id'>;
