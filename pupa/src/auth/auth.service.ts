@@ -19,8 +19,8 @@ export class AuthService {
   ): Promise<AdminWithoutPassword | null> {
     const coincidePass = await checkPassword(pass, user.password);
     if (user && coincidePass) {
-      const { password, ...rest } = user;
-      return rest;
+      const { email, id, username, role, lastName, firstName } = user;
+      return { email, id, username, role, lastName, firstName };
     }
     throw new HttpException('Неверный пароль', HttpStatus.UNAUTHORIZED);
   }

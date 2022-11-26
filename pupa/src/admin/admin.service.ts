@@ -7,7 +7,12 @@ import { Role } from '../models/role.model';
 
 import { hashPassword } from './admin.utils';
 
-import { FullAdmin, FullRole, NewAdmin } from '../dtos/admin.dto';
+import {
+  AdminWithoutPassword,
+  FullAdmin,
+  FullRole,
+  NewAdmin,
+} from '../dtos/admin.dto';
 
 @Injectable()
 export class AdminService {
@@ -41,6 +46,13 @@ export class AdminService {
 
   async findOneAdmin(email: string): Promise<FullAdmin> {
     return await this.admin.findOne({ where: { email } });
+  }
+
+  async findOneAdminWtPass(email: string): Promise<AdminWithoutPassword> {
+    return await this.admin.findOne({
+      where: { email },
+      attributes: { exclude: ['password'] },
+    });
   }
 
   async findRole(roleId: number): Promise<FullRole> {

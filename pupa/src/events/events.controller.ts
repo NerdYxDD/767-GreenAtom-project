@@ -15,7 +15,7 @@ export class EventsController {
 
   @UseGuards(JwtAuthGuard)
   @Get(':code')
-  async getEventListeners(@Param('code') code: string): Promise<FullEvent[]> {
+  getEventListeners(@Param('code') code: string): Promise<FullEvent[]> {
     return this.eventService.getEvent(code);
   }
 }
