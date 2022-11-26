@@ -25,7 +25,7 @@ export class EventsController {
   async createEvent(
     @Body() event: CreateEvent,
     @Request() { user }: { user: JWTPayload },
-  ): Promise<FullEvent> {
+  ): Promise<FullEvent[]> {
     permissionChecker(user?.roleId);
     return this.eventService.createEvent(event, user.sub);
   }
@@ -42,7 +42,9 @@ export class EventsController {
 
   @UseGuards(JwtAuthGuard)
   @Get('/active-events')
-  getActiveEvent(@Request() user: JWTPayload): Promise<FullEvent[]> {
+  getActiveEvent(
+    @Request() { user }: { user: JWTPayload },
+  ): Promise<FullEvent[]> {
     permissionChecker(user?.roleId);
     return this.eventService.getActiveEvent(user.sub);
   }
@@ -51,9 +53,9 @@ export class EventsController {
   @Put('/:id')
   changeStatusEvent(
     @Param('id') id: string,
-    @Request() user: JWTPayload,
-  ): Promise<FullEvent> {
+    @Request() { user }: { user: JWTPayload },
+  ): Promise<FullEvent[]> {
     permissionChecker(user?.roleId);
-    return this.eventService.changeStatus(id);
+    return this.eventService.changeStatus(id, user?.sub);
   }
 }
