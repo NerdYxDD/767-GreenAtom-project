@@ -12,7 +12,7 @@ import { EventsService } from './events.service';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 
 import { JWTPayload } from '../auth/auth.types';
-import { FullEvent } from 'src/dtos/event.dto';
+import { CreateEvent, FullEvent } from 'src/dtos/event.dto';
 import { permissionChecker } from '../auth/auth.utils';
 
 @Controller('events')
@@ -22,7 +22,7 @@ export class EventsController {
   @UseGuards(JwtAuthGuard)
   @Post('')
   async createEvent(
-    @Body() event: FullEvent,
+    @Body() event: CreateEvent,
     @Request() user: JWTPayload,
   ): Promise<FullEvent> {
     permissionChecker(user?.roleId);
