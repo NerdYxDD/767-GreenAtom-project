@@ -1,0 +1,28 @@
+.EditButton {
+  color: blue;
+  border-color: blue;
+}
+
+.DeleteButton {
+  color: red;
+  border-color: red;
+  margin-left: 10px;
+}
+
+.Card {
+  min-width: 230px;
+  margin: 8px 0;
+
+  display: flex;
+  justify-content: space-between;
+
+
+}
+
+.Background {
+  margin: 8px 0;
+}
+
+.Tittle {
+  font-weight: 700;
+}
