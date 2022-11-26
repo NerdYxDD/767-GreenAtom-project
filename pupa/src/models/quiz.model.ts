@@ -32,7 +32,7 @@ export class Quiz extends Model {
   event: RoomEvent;
 
   @HasMany(() => Questions)
-  qustion: Questions;
+  question: Questions;
 
   @ForeignKey(() => RoomEvent)
   @AllowNull(false)
