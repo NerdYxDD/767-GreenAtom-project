@@ -16,4 +16,8 @@ export class GuestService {
   async newGuest({ email, username }: NewGuest): Promise<FullGuest> {
     return await this.guest.create({ id: uuidv4(), email, username });
   }
+
+  async findGuest(email: string): Promise<FullGuest> {
+    return await this.guest.findOne({ where: { email } });
+  }
 }
