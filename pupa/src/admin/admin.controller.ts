@@ -18,6 +18,7 @@ import {
   FullAdmin,
   LoginAdmin,
   NewAdmin,
+  NewCreatedUser,
 } from '../dtos/admin.dto';
 import { JWTPayload } from '../auth/auth.types';
 import { permissionChecker } from '../auth/auth.utils';
@@ -34,7 +35,7 @@ export class AdminController {
   create(
     @Body() admin: NewAdmin,
     @Request() { user }: { user: JWTPayload },
-  ): Promise<FullAdmin> {
+  ): Promise<NewCreatedUser> {
     permissionChecker(user?.roleId);
 
     const { email, password, username, lastName, firstName } = admin;

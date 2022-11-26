@@ -12,6 +12,7 @@ export type FullAdmin = Admin;
 export type NewAdmin = Omit<Admin, 'id' | 'role'>;
 export type AdminWithoutPassword = Omit<Admin, 'password'>;
 export type LoginAdmin = Pick<Admin, 'email' | 'password'>;
+export type NewCreatedUser = Omit<Admin, 'password' | 'role'>;
 
 class Role {
   id: number;
