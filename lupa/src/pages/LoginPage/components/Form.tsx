@@ -44,7 +44,6 @@ export const Form: React.FC = () => {
         type='text'
         className={styles.InputContainer}
         onChange={(event) => changeHandler('name', event.target.value)}
-        style={{ margin: '5px 0' }}
       />
 
       <Input
@@ -53,7 +52,6 @@ export const Form: React.FC = () => {
         size='middle'
         className={styles.InputContainer}
         onChange={(event) => changeHandler('email', event.target.value)}
-        style={{ margin: '5px 0' }}
       />
 
       <Input
@@ -61,7 +59,6 @@ export const Form: React.FC = () => {
         placeholder='Введите код комнаты (при наличии)'
         className={styles.InputContainer}
         onChange={(event) => changeHandler('eventId', event.target.value)}
-        style={{ margin: '5px 0' }}
       />
 
       <Checkbox
