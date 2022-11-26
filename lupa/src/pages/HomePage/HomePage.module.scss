@@ -1,0 +1,166 @@
+//@keyframes wipe-enter {
+//  0% {
+//    transform: scale(0, .025);
+//  }
+//  50% {
+//    transform: scale(1, .025);
+//  }
+//}
+
+//@media (prefers-reduced-motion: no-preference) {
+//  .forLogo {
+//    animation-name: wipe-enter;
+//    animation-duration: 1s;
+//    animation-iteration-count: infinite;
+//  }
+//}
+
+.background {
+  position: absolute;
+  width: 100%;
+  height: 900px;
+  left: 0;
+  top: 0;
+
+  background-color: white;
+}
+
+.greenAtom {
+  position: relative;
+  width: 100%;
+  height: 200px;
+
+  background: #6FB22F; //#003274 2bb909
+  font-family: 'Golos Text VF', sans-serif;
+  text-align: center;
+
+  span {
+    position: relative;
+    //color: black;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 28px;
+  }
+
+}
+
+.stazhirovka {
+  position: relative;
+  width: 182px;
+  color: whitesmoke;
+
+  border-bottom-right-radius: 10px;
+  border-top-left-radius: 10px;
+
+  background: #2bb909;
+}
+
+.textBlock {
+  position: relative;
+  width: 182px;
+  height: 84px;
+  left: 10%;
+  top: calc(50% - 52px);
+}
+
+.greenLabIcon {
+  position: relative;
+  //top: 250px;
+  width: 150px;
+}
+
+.forLogo {
+  position: relative;
+  width: 170px;
+  height: 56px;
+  float: right;
+  top: -30px; //calc(100% - 28px - 84px);
+
+  border: 2px solid #6FB22F;
+  border-right: 0;
+  border-top-left-radius: 28px;
+  border-bottom-left-radius: 28px;
+
+  background: white;
+
+
+}
+
+.textBlock1 {
+  position: relative;
+  width: 100%;
+  height: 300px;
+
+  display: flex;
+
+  justify-content: center;
+
+  background: #D3D3D3;
+}
+
+.textBlock2 {
+  position: relative;
+  width: 100%;
+  height: 200px;
+  top: 0;
+
+  display: flex;
+
+  font-family: 'Golos Text VF', sans-serif;
+
+  justify-content: center;
+
+  background: #6FB22F;
+
+  span {
+    position: absolute;
+    //text-align: right;
+    font-weight: 700;
+    font-size: 22px;
+    line-height: 24px;
+  }
+
+  span[id='1'] {
+    top: 27px;
+    left: 96px;
+  }
+
+  span[id='2'] {
+    top: 53px;
+    left: 123px;
+  }
+}
+
+.textBlock3 {
+  position: relative;
+  width: 100%;
+  height: 200px;
+  top: 0;
+
+  display: flex;
+
+  justify-content: center;
+
+  background: #D3D3D3;
+}
+
+.infoBlocks {
+  position: relative;
+  text-align: center;
+  top: -30px;
+}
+
+.gradient {
+  position: relative;
+  height: 30px;
+
+  background: linear-gradient(to bottom, #6FB22F, #D3D3D3);
+}
+
+.image1 {
+  position: relative;
+  height: 190px;
+  top: 10px;
+  right: 10px;
+}
+
