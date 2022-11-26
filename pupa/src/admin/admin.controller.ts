@@ -1,17 +1,25 @@
 import {
   Body,
   Controller,
+  Get,
   HttpException,
   HttpStatus,
   Post,
   UseGuards,
+  Request,
 } from '@nestjs/common';
 
 import { AuthService } from '../auth/auth.service';
 import { AdminService } from './admin.service';
-
-import { FullAdmin, LoginAdmin, NewAdmin } from '../dtos/admin.dto';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
+
+import {
+  AdminWithoutPassword,
+  FullAdmin,
+  LoginAdmin,
+  NewAdmin,
+} from '../dtos/admin.dto';
+import { JWTPayload } from '../auth/auth.types';
 
 @Controller('admin')
 export class AdminController {
@@ -55,5 +63,13 @@ export class AdminController {
     const role = await this.adminService.findRole(admin.role);
 
     return this.authService.loginAdmin(validatedUser, role);
+  }
+
+  @Get('/current')
+  @UseGuards(JwtAuthGuard)
+  async getEventListeners(
+    @Request() { user }: { user: JWTPayload },
+  ): Promise<AdminWithoutPassword> {
+    return await this.adminService.findOneAdminWtPass(user.email);
   }
 }
