@@ -7,6 +7,7 @@ import { GuestModule } from './guest/guest.module';
 import { AdminModule } from './admin/admin.module';
 import { EventsModule } from './events/events.module';
 import { QuizModule } from './quiz/quiz.module';
+import { CheckingTestModule } from './checking-test/checking-test.module';
 
 @Module({
   imports: [
@@ -16,6 +17,7 @@ import { QuizModule } from './quiz/quiz.module';
     AdminModule,
     EventsModule,
     QuizModule,
+    CheckingTestModule,
   ],
   controllers: [],
   providers: [],
