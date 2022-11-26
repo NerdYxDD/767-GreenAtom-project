@@ -10,6 +10,7 @@ import { QuizModule } from './quiz/quiz.module';
 import { QuestionsModule } from './questions/questions.module';
 import { AnswersModule } from './answers/answers.module';
 import { FormForTestModule } from './form_for_test/form_for_test.module';
+import { CheckingTestModule } from './checking-test/checking-test.module';
 
 @Module({
   imports: [
