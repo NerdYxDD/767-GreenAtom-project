@@ -29,7 +29,7 @@ export class AdminController {
     private readonly authService: AuthService,
   ) {}
 
-  @UseGuards(JwtAuthGuard)
+  // @UseGuards(JwtAuthGuard)
   @Post('/create')
   create(@Body() admin: NewAdmin, user: JWTPayload): Promise<FullAdmin> {
     permissionChecker(user?.roleId);
