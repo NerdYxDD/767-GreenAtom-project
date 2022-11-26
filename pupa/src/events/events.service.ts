@@ -1,7 +1,7 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { v4 as uuidv4 } from 'uuid';
 
-import { FullEvent } from 'src/dtos/event.dto';
+import { CreateEvent, FullEvent } from 'src/dtos/event.dto';
 import { InjectModel } from '@nestjs/sequelize';
 import { RoomEvent } from 'src/models/event.model';
 import { Op } from 'sequelize';
@@ -13,7 +13,7 @@ export class EventsService {
     private readonly event: typeof RoomEvent,
   ) {}
 
-  async createEvent(event: FullEvent): Promise<FullEvent> {
+  async createEvent(event: CreateEvent): Promise<FullEvent> {
     const code = Date.now().toString(36).slice(2, 8);
     const newEvent = {
       id: uuidv4(),
