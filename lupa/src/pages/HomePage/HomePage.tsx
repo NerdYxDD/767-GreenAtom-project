@@ -31,11 +31,9 @@ const HomePage = () => (
             <div className={styles.textBlock2}>
                 <div style={{ width: 'calc(100% - 30px)', maxWidth: '600px', display: 'flex' }}>
                     <img src={image1} className={styles.image1} alt=''/>
-                    <div style={{ borderBottomLeftRadius: '' }}>
-                        <span id='1'>Мы готовим IT-кадры</span>
-                        <br/>
-                        <span id='2'>для атомной отрасли</span>
-                    </div>
+                        <span id='1'>Мы готовим IT-кадры
+                        <br/>для атомной отрасли</span>
+
                 </div>
             </div>
             <div className={styles.textBlock3}>
