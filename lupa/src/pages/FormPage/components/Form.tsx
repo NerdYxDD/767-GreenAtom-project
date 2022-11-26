@@ -30,6 +30,13 @@ export const Form: React.FC = () => {
     return (
         <div className={styles.Box}>
 
+            <span className={styles.Span}>
+                Чтобы узнать, какие востребованные профессии будущего вам подходят больше всего, оставьте ваши контактные данные
+            </span>
+
+            <br/>
+            <br/>
+
             <label htmlFor='name' className={styles.Label}>
                 Введите свое имя
             </label>

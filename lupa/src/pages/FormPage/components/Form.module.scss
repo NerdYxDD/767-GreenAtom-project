@@ -11,7 +11,11 @@ body {
 .Box {
   position:absolute;
   left:50%;
-  top:50%;
+  top:57%;
+  min-height: 50vh;
+  min-width: 320px;
+  height: 73vh;
+  width: 340px;
   transform: translate(-50%,-50%);
   background-color: rgba(211, 211, 211, 0.89);
   border-radius:3px;
@@ -23,10 +27,10 @@ body {
   position:relative;
   margin-bottom:25px;
 
+  text-indent: 8px;
   border:0;
   border-bottom:1px solid #555;
   background:transparent;
-  width:100%;
   padding:8px 0 5px 0;
   font-size:16px;
   color:#000;
@@ -65,4 +69,9 @@ body {
 .Checkbox {
   cursor: pointer;
   font-family: 'Noto Sans', sans-serif;
+}
+
+.Span {
+  text-align: center;
+  width: 100%;
 }
