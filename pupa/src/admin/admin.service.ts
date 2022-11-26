@@ -23,14 +23,10 @@ export class AdminService {
     return this.admin.create({
       id: uuidv4(),
       password: hashPassword(password),
+      role: 1,
       ...rest,
     });
   }
-
-  // login(admin: LoginAdmin): { access_token: string } {
-  //
-  //   return { access_token: 'dfdgf'}
-  // }
 
   async findOneAdmin(email: string): Promise<FullAdmin> {
     return await this.admin.findOne({ where: { email } });
