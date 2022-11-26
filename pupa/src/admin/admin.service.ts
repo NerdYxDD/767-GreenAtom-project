@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
 import { v4 as uuidv4 } from 'uuid';
 
@@ -7,7 +7,12 @@ import { Role } from '../models/role.model';
 
 import { hashPassword } from './admin.utils';
 
-import { FullAdmin, FullRole, NewAdmin } from '../dtos/admin.dto';
+import {
+  AdminWithoutPassword,
+  FullAdmin,
+  FullRole,
+  NewAdmin,
+} from '../dtos/admin.dto';
 
 @Injectable()
 export class AdminService {
@@ -18,8 +23,19 @@ export class AdminService {
     private readonly role: typeof Role,
   ) {}
 
-  create(admin: NewAdmin): Promise<FullAdmin> {
+  async create(admin: NewAdmin): Promise<FullAdmin> {
     const { password, ...rest } = admin;
+    const checkAdmin = await this.admin.findOne({
+      where: { email: rest.email },
+    });
+
+    if (checkAdmin) {
+      throw new HttpException(
+        'Администратор с этим пользователем уже существет',
+        HttpStatus.BAD_REQUEST,
+      );
+    }
+
     return this.admin.create({
       id: uuidv4(),
       password: hashPassword(password),
@@ -30,6 +46,13 @@ export class AdminService {
 
   async findOneAdmin(email: string): Promise<FullAdmin> {
     return await this.admin.findOne({ where: { email } });
+  }
+
+  async findOneAdminWtPass(email: string): Promise<AdminWithoutPassword> {
+    return await this.admin.findOne({
+      where: { email },
+      attributes: { exclude: ['password'] },
+    });
   }
 
   async findRole(roleId: number): Promise<FullRole> {

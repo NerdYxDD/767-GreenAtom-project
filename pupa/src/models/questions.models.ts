@@ -1,7 +1,6 @@
 import {
   AllowNull,
   Column,
-  HasMany,
   IsUUID,
   Model,
   PrimaryKey,
@@ -9,12 +8,10 @@ import {
   Unique,
 } from 'sequelize-typescript';
 
-import { GuestEvent } from './guest_event.model';
-
 @Table({
-  tableName: 'guest',
+  tableName: 'questions',
 })
-export class Guest extends Model {
+export class Questions extends Model {
   @IsUUID(4)
   @PrimaryKey
   @Unique
@@ -24,11 +21,5 @@ export class Guest extends Model {
 
   @Unique
   @Column
-  email: string;
-
-  @Column
-  username: string;
-
-  @HasMany(() => GuestEvent)
-  event: GuestEvent;
+  text: string;
 }

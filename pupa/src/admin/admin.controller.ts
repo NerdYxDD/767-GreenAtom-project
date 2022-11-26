@@ -1,17 +1,25 @@
 import {
   Body,
   Controller,
+  Get,
   HttpException,
   HttpStatus,
   Post,
   UseGuards,
+  Request,
 } from '@nestjs/common';
 
 import { AuthService } from '../auth/auth.service';
 import { AdminService } from './admin.service';
-
-import { FullAdmin, LoginAdmin, NewAdmin } from '../dtos/admin.dto';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
+
+import {
+  AdminWithoutPassword,
+  FullAdmin,
+  LoginAdmin,
+  NewAdmin,
+} from '../dtos/admin.dto';
+import { JWTPayload } from '../auth/auth.types';
 
 @Controller('admin')
 export class AdminController {
@@ -22,7 +30,13 @@ export class AdminController {
 
   @UseGuards(JwtAuthGuard)
   @Post('/create')
-  create(@Body() admin: NewAdmin): Promise<FullAdmin> {
+  create(@Body() admin: NewAdmin, user: JWTPayload): Promise<FullAdmin> {
+    if (!user?.roleId) {
+      throw new HttpException(
+        'Нету доступа управлять админами',
+        HttpStatus.FORBIDDEN,
+      );
+    }
     const { email, password, username, lastName, firstName } = admin;
     if (!email || !password || !username || !lastName || !firstName) {
       throw new HttpException(
@@ -55,5 +69,19 @@ export class AdminController {
     const role = await this.adminService.findRole(admin.role);
 
     return this.authService.loginAdmin(validatedUser, role);
+  }
+
+  @Get('/current')
+  @UseGuards(JwtAuthGuard)
+  async getEventListeners(
+    @Request() { user }: { user: JWTPayload },
+  ): Promise<AdminWithoutPassword> {
+    if (!user?.roleId) {
+      throw new HttpException(
+        'Нету доступа управлять админами',
+        HttpStatus.FORBIDDEN,
+      );
+    }
+    return await this.adminService.findOneAdminWtPass(user.email);
   }
 }
