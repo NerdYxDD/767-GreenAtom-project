@@ -1,7 +1,6 @@
 import {
   AllowNull,
   Column,
-  Default,
   ForeignKey,
   IsUUID,
   Model,
@@ -9,7 +8,6 @@ import {
   Table,
   Unique,
 } from 'sequelize-typescript';
-import { v4 as uuidv4 } from 'uuid';
 
 import { Role } from './role.model';
 
@@ -18,7 +16,6 @@ import { Role } from './role.model';
 })
 export class Admin extends Model {
   @IsUUID(4)
-  @Default(uuidv4())
   @PrimaryKey
   @Unique
   @AllowNull(false)
