@@ -1,9 +1,11 @@
 import {
   Body,
   Controller,
+  Delete,
   Get,
   Param,
   Post,
+  Put,
   Request,
   UseGuards,
 } from '@nestjs/common';
@@ -20,7 +22,7 @@ export class EventsController {
   constructor(private readonly eventService: EventsService) {}
 
   @UseGuards(JwtAuthGuard)
-  @Post('')
+  @Post('/create')
   async createEvent(
     @Body() event: FullEvent,
     @Request() user: JWTPayload,
@@ -37,5 +39,22 @@ export class EventsController {
   ): Promise<FullEvent[]> {
     permissionChecker(user?.roleId);
     return this.eventService.getEvent(code);
+  }
+
+  @UseGuards(JwtAuthGuard)
+  @Get('/active-events')
+  getActiveEvent(@Request() user: JWTPayload): Promise<FullEvent[]> {
+    permissionChecker(user?.roleId);
+    return this.eventService.getActiveEvent(user.sub);
+  }
+
+  @UseGuards(JwtAuthGuard)
+  @Put('/:id')
+  changeStatusEvent(
+    @Param('id') id: string,
+    @Request() user: JWTPayload,
+  ): Promise<FullEvent> {
+    permissionChecker(user?.roleId);
+    return this.eventService.changeStatus(id);
   }
 }
