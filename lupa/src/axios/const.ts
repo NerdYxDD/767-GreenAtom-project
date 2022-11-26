@@ -15,10 +15,13 @@ export const RequestURLs = {
   admin: {
     create: `${BaseURL}/admin/create`,
     login: `${BaseURL}/admin/login`,
+    getMyProfile: `${BaseURL}/admin/current`,
   },
-};
-
-export const METHODS = {
-  GET: 'GET',
-  POST: 'POST',
+  event: {
+    getEventByCode: `${BaseURL}/event`,
+    createEvent: `${BaseURL}/event/create`,
+  },
+  quiz: {
+    createQuiz: `${BaseURL}/quiz/create`,
+  },
 };
