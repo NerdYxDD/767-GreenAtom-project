@@ -30,7 +30,13 @@ export class AdminController {
 
   @UseGuards(JwtAuthGuard)
   @Post('/create')
-  create(@Body() admin: NewAdmin): Promise<FullAdmin> {
+  create(@Body() admin: NewAdmin, user: JWTPayload): Promise<FullAdmin> {
+    if (!user?.roleId) {
+      throw new HttpException(
+        'Нету доступа управлять админами',
+        HttpStatus.FORBIDDEN,
+      );
+    }
     const { email, password, username, lastName, firstName } = admin;
     if (!email || !password || !username || !lastName || !firstName) {
       throw new HttpException(
@@ -70,6 +76,12 @@ export class AdminController {
   async getEventListeners(
     @Request() { user }: { user: JWTPayload },
   ): Promise<AdminWithoutPassword> {
+    if (!user?.roleId) {
+      throw new HttpException(
+        'Нету доступа управлять админами',
+        HttpStatus.FORBIDDEN,
+      );
+    }
     return await this.adminService.findOneAdminWtPass(user.email);
   }
 }
