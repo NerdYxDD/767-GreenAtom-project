@@ -17,6 +17,7 @@ const App = () => (
         <Route path='/quiz' element={<QuizPage />} />
         <Route path='/admin' element={<AdminPage />} />
         <Route path='/quizList' element={<QuizListPage />} />
+        <Route path='/adminPage' element={<AdminPage />} />
         <Route path='/editEventModal' element={<EditEventModal />} />
       </Route>
     </Routes>
