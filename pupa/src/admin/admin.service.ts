@@ -2,8 +2,8 @@ import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
 import { v4 as uuidv4 } from 'uuid';
 
-import { Admin } from '../models/Admin.model';
-import { Role } from '../models/role.model';
+import { Admin } from '../../models/Admin.model';
+import { Role } from '../../models/role.model';
 
 import { hashPassword } from './admin.utils';
 

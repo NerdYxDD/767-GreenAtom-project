@@ -3,7 +3,7 @@ import { v4 as uuidv4 } from 'uuid';
 
 import { FullEvent } from 'src/dtos/event.dto';
 import { InjectModel } from '@nestjs/sequelize';
-import { RoomEvent } from 'src/models/event.model';
+import { RoomEvent } from 'models/event.model';
 
 @Injectable()
 export class EventsService {
