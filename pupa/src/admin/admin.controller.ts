@@ -15,7 +15,6 @@ import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 
 import {
   AdminWithoutPassword,
-  FullAdmin,
   LoginAdmin,
   NewAdmin,
   NewCreatedUser,
