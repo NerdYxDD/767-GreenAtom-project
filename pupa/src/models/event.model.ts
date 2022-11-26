@@ -2,6 +2,7 @@ import {
   AllowNull,
   BelongsTo,
   Column,
+  Default,
   ForeignKey,
   HasMany,
   IsUUID,
@@ -32,6 +33,11 @@ export class RoomEvent extends Model {
 
   @Column
   title: string;
+
+  @AllowNull(false)
+  @Default(true)
+  @Column
+  active: boolean;
 
   @BelongsTo(() => Admin)
   owner: Admin;
