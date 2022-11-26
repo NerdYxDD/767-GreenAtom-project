@@ -1,6 +1,8 @@
 import {
   Body,
   Controller,
+  Get,
+  Param,
   HttpException,
   HttpStatus,
   Post,
@@ -40,8 +42,9 @@ export class QuizController {
     return this.quizService.createQuiz(quiz);
   }
 
+  // something here is wrong
   @UseGuards(JwtAuthGuard)
-  @Post('/create')
+  @Post('/pass')
   async passedQuiz(
     @Body() quiz: PassedQuiz,
     @Request() { user }: { user: JWTPayload },
@@ -60,5 +63,17 @@ export class QuizController {
     // to do save answers of a user
 
     return this.quizService.getAllPassedByGuest(user.sub);
+  }
+
+  @UseGuards(JwtAuthGuard)
+  @Get('/:eventId')
+  async getElementId(
+    @Param('eventId') eventId: string,
+    @Request() { user }: { user: JWTPayload },
+  ) {
+    permissionChecker(user?.roleId);
+
+    console.log(eventId);
+    return this.quizService.getQuizes(eventId);
   }
 }
