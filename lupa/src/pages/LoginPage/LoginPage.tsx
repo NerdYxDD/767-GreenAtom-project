@@ -1,5 +1,5 @@
-import React, { useMemo, useState } from 'react';
 import { Button, Checkbox, Input } from 'antd';
+import React, { useMemo, useState } from 'react';
 // @ts-ignore
 import styles from './LoginPage.module.scss';
 
