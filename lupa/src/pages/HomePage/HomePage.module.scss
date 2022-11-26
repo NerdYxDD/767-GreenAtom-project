@@ -1,64 +1,68 @@
 .Background {
-  position: absolute;
-  width: 100%;
-  height: 900px;
+  position: static;
+  min-width: 100%;
   left: 0;
   top: 0;
 
   background-color: white;
+
+  font-family: 'Golos Text VF', sans-serif;
 }
 
 .GreenAtom {
   position: relative;
-  width: 100%;
-  //height: 200px;
-  height: 20vh;
+  max-width: 100%;
+  max-height: 84px;
 
-  background: #6FB22F; //#003274 2bb909
-  font-family: 'Golos Text VF', sans-serif;
+  box-shadow: 5px 10px 20px rgba(0,0,0,0.3), -5px -10px 20px rgba(255,255,255,0.5);
+
+  padding: 8px;
   text-align: center;
 
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 28px;
   span {
     position: relative;
-    //color: black;
-    font-weight: 700;
-    font-size: 24px;
-    line-height: 28px;
   }
-
+  z-index: 99;
 }
 
 .Stazhirovka {
   position: relative;
   width: 182px;
-  color: #2bb909;
+  color: #fff;
 
   border-bottom-right-radius: 10px;
   border-top-left-radius: 10px;
 
-  background:  whitesmoke;
+  background:  #6FB22F;
 }
 
 .TextBlock {
-  position: relative;
   width: 182px;
-  height: 84px;
-  left: 10%;
-  top: calc(50% - 52px);
+  height: 50px;
+
+  span[id='1'] {
+    left: -53px;
+  }
+
+  span[id='2'] {
+    left: 13px;
+  }
 }
 
 .GreenLabIcon {
   position: relative;
-  //top: 250px;
   width: 150px;
 }
 
 .ForLogo {
-  position: relative;
+  position: fixed;
   width: 170px;
   height: 56px;
-  float: right;
-  top: -30px; //calc(100% - 28px - 84px);
+  left: calc(100% - 170px);
+  top: 70px;
 
   border: 2px solid #6FB22F;
   border-right: 0;
@@ -67,19 +71,50 @@
 
   background: white;
 
+  z-index: 999999;
 
+  transition: all 0.2s;
+  &:hover {
+    width: 230px;
+    left: calc(100% - 230px);
+  }
 }
 
 .TextBlock1 {
   position: relative;
   width: 100%;
-  height: 300px;
+  height: 590px;
 
   display: flex;
 
-  justify-content: center;
+  //justify-content: center;
 
-  background: #D3D3D3;
+  background: url("../../ui/images/Tiotya_img.png");
+  //background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+
+
+  span[id='1'] {
+    font-size: 82px;
+    line-height: 84px;
+    font-weight: 700;
+  }
+
+  span[id='2'] {
+    font-size: 82px;
+    line-height: 84px;
+    font-weight: 700;
+
+    color: #2bb909;
+  }
+}
+
+.block1 {
+  position: relative;
+  left: calc(100% - 700px);
+  width: 700px;
+  height: 100%;
 }
 
 .TextBlock2 {
@@ -88,17 +123,14 @@
   height: 200px;
   top: 0;
 
-  display: flex;
 
-  font-family: 'Golos Text VF', sans-serif;
+  display: flex;
 
   justify-content: center;
 
   background: #6FB22F;
 
   span {
-    //position: absolute;
-    //text-align: right;
     font-weight: 700;
     font-size: 22px;
     line-height: 24px;
@@ -131,14 +163,14 @@
 .InfoBlocks {
   position: relative;
   text-align: center;
-  top: -30px;
+  max-width: 100%;
+
+  left: 0;
 }
 
 .Gradient {
   position: relative;
   height: 30px;
-
-  background: linear-gradient(to bottom, #6FB22F, #D3D3D3);
 }
 
 .Image1 {
@@ -146,5 +178,94 @@
   height: 190px;
   top: 10px;
   right: 10px;
+}
+
+@media (max-width: 2560px) {
+  .GreenAtom div[id='textGreen'] {
+    position: relative;
+    height: 86px;
+    left: calc(50% - 750px);
+    top: 0;
+    width: 1100px;
+  }
+
+  .Stazhirovka {
+    position: relative;
+    width: 182px;
+    color: #fff;
+
+    border-bottom-right-radius: 10px;
+    border-top-left-radius: 10px;
+
+    background:  #6FB22F;
+
+    span[id='1'] {
+      left: -53px;
+    }
+
+    span[id='2'] {
+      left: -13px;
+    }
+  }
+}
+
+@media (max-width: 1200px) {
+  .InfoBlocks {
+    left: 0;
+  }
+
+  .ForLogo {
+    top: 0;
+    width: 110px;
+    height: 45px;
+    left: calc(100% - 110px);
+
+    border-top: 0;
+    border-right: 2px solid #2bb909;
+    border-top-right-radius: 0;
+    border-top-left-radius: 0;
+
+    .GreenLabIcon {
+      position: relative;
+      left: 10px;
+      width: 100px;
+    }
+  }
+
+  .GreenAtom div[id='textGreen'] {
+    position: static;
+    height: 50px;
+    width: 100%;
+  }
+
+  .TextBlock {
+    left: 20px;
+
+    span[id='1'] {
+      left: -69px;
+    }
+
+    span[id='2'] {
+      left: -30px;
+    }
+  }
+
+  .GreenAtom {
+    height: 56px;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 18px;
+  }
+
+  .Stazhirovka {
+    position: relative;
+    width: 120px;
+    color: #fff;
+
+    border-bottom-right-radius: 6px;
+    border-top-left-radius: 6px;
+
+    background:  #6FB22F;
+  }
 }
 
