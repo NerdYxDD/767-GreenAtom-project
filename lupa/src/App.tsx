@@ -6,15 +6,15 @@ import HomePage from './pages/HomePage/HomePage';
 import QuizPage from './pages/QuizPage/QuizPage';
 
 const App = () => (
-  <div className='App'>
-    <Routes>
-      <Route path='/' element={<Layout />}>
-        <Route index element={<HomePage />} />
-        <Route path='/login' element={<LoginPage />} />
-        <Route path='/quiz' element={<QuizPage />} />
-      </Route>
-    </Routes>
-  </div>
+    <div className='App'>
+        <Routes>
+            <Route index element={<HomePage/>}/>
+            <Route path='/' element={<Layout/>}>
+                <Route path='/login' element={<LoginPage/>}/>
+                <Route path='/quiz' element={<QuizPage/>}/>
+            </Route>
+        </Routes>
+    </div>
 );
 
 export default App;
