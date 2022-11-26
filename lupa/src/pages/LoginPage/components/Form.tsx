@@ -1,7 +1,8 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import { Checkbox, Button, Input } from 'antd';
 // @ts-ignore
 import styles from './Form.module.scss';
+import { createGuest } from '../../../axios/requests/guest';
 
 const emailCheck = /\S+@\S+\.\S+/;
 
