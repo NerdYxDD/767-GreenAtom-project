@@ -37,6 +37,7 @@ export class EventsController {
     @Request() { user }: { user: JWTPayload },
   ): Promise<FullEvent> {
     permissionChecker(user?.roleId);
+    
     return this.eventService.getEvent(code);
   }
 
@@ -50,7 +51,7 @@ export class EventsController {
   }
 
   @UseGuards(JwtAuthGuard)
-  @Put('/:id')
+  @Put('changeStatus/:id')
   changeStatusEvent(
     @Param('id') id: string,
     @Request() { user }: { user: JWTPayload },

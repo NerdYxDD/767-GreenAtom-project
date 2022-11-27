@@ -13,6 +13,7 @@ import devopsImg from '../../ui/icons/devops.png';
 import hrImg from '../../ui/icons/hr.png';
 // @ts-ignore
 import softwareImg from '../../ui/icons/software-engineer.png';
+import { AccessKey } from '../../axios/const';
 
 const HomePage = () => (
   <div>
@@ -20,6 +21,12 @@ const HomePage = () => (
       <a href='https://edu.greenatom.ru/'>
         <img src={logoIT} alt='logo' className={styles.Logo} />
       </a>
+      <Link
+        to={localStorage.getItem(AccessKey) ? '/quizList' : '/login'}
+        className={styles.LoginLink}
+      >
+        Ознакомиться с программой
+      </Link>
     </div>
     <div className={styles.Invitation}>
       <div className={styles.Container}>

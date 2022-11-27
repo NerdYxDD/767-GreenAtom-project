@@ -33,7 +33,7 @@ export class EventsService {
   async getActiveEvent(id: string): Promise<FullEvent[]> {
     return await this.event.findAll({
       where: {
-        [Op.and]: [{ id }, { active: true }],
+        [Op.and]: [{ ownerId: id }, { active: true }],
       },
     });
   }

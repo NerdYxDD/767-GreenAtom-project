@@ -7,7 +7,6 @@ import QuizListPage from '../pages/QuizListPage/QuizListPage';
 import EditEventModal from '../pages/AdminPage/components/EditEventModal/EditEventModal';
 import AdminPage from '../pages/AdminPage/AdminPage';
 
-
 export const publicRoutes = [
   {
     path: '/login',
@@ -15,8 +14,8 @@ export const publicRoutes = [
   },
   {
     path: '*',
-    element: <Navigate to='/login'/>,
-  }
+    element: <Navigate to='/login' />,
+  },
 ];
 
 export const guestRoutes = [
@@ -30,8 +29,8 @@ export const guestRoutes = [
   },
   {
     path: '*',
-    element: <Navigate to='/quizList'/>,
-  }
+    element: <Navigate to='/quizList' />,
+  },
 ];
 
 export const adminRoutes = [
@@ -45,6 +44,6 @@ export const adminRoutes = [
   },
   {
     path: '*',
-    element: <Navigate to='/adminPage'/>,
-  }
+    element: <Navigate to='/adminPage' />,
+  },
 ];
