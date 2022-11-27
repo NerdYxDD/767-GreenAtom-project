@@ -46,7 +46,7 @@ export class EventsController {
   }
 
   @UseGuards(JwtAuthGuard)
-  @Put('/:id')
+  @Put('changeStatus/:id')
   changeStatusEvent(
     @Param('id') id: string,
     @Request() { user }: { user: JWTPayload },
