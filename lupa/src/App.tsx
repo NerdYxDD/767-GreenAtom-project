@@ -8,6 +8,7 @@ import { adminRoutes, guestRoutes, publicRoutes } from './Routes/routes';
 import { useAppDispatch, useAppSelector } from './redux/hooks/redux.hooks';
 import { userSelector } from './redux/selectors/user.selector';
 import { getAdminProfile } from './redux/reducers/User/user.requests';
+import AdminPage from './pages/AdminPage/AdminPage';
 
 const App = () => {
   const dispatch = useAppDispatch();

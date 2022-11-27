@@ -9,7 +9,7 @@ import styles from './EditEventModal.module.scss';
 
 const EditEventModal: React.FC = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const quizNames = ['Какой ты прогаммист', 'name2', 'name3', 'name4', 'name5'];
+  const quizNames = [{ name: 'Какой ты прогаммист' }];
 
   const showModal = () => {
     setIsModalOpen(true);
@@ -38,7 +38,7 @@ const EditEventModal: React.FC = () => {
         <span className={styles.Span}>Квизы события: </span>
         <br />
         {quizNames.map((quiz) => (
-          <QuizCardAdmin name={quiz} />
+            <QuizCardAdmin name={quiz.name} />
         ))}
       </Modal>
     </>

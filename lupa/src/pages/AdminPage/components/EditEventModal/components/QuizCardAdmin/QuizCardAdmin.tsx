@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Card, Button } from 'antd';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { DeleteOutlined } from '@ant-design/icons';
@@ -12,6 +12,18 @@ interface QuizCardAdminProps {
 }
 
 const QuizCardAdmin: React.FC<QuizCardAdminProps> = ({ name }) => {
+    const [questions, setQuestions] = useState([
+        {
+            text: '',
+            answers: [
+                {
+                    text: '',
+                    isRight: false,
+                },
+            ],
+        },
+    ]);
+
     return (
         <Card className={styles.Background}>
             <span className={styles.Tittle}>{name}</span>
