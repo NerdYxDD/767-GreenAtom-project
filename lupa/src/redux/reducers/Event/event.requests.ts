@@ -1,7 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { GetEventByCodeDto } from '../../../types/event';
+import { GetEventByCodeDto } from '../../../types/events';
 import { EventCode } from '../../../types/types';
-import { getEventByCode } from '../../../axios/requests/event';
+import { getEventByCode } from '../../../axios/requests/events';
 
 export const getEventByCodeRequest = createAsyncThunk<
   GetEventByCodeDto,

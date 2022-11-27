@@ -17,11 +17,19 @@ export const RequestURLs = {
     login: `${BaseURL}/admin/login`,
     getMyProfile: `${BaseURL}/admin/current`,
   },
-  event: {
+  events: {
     getEventByCode: `${BaseURL}/events`,
     createEvent: `${BaseURL}/events/create`,
   },
   quiz: {
     createQuiz: `${BaseURL}/quiz/create`,
+  },
+  questions: {
+    getQuestionsByQuizId: `${BaseURL}/questions`,
+    getAllQuestions: `${BaseURL}/questions`,
+  },
+  answers: {
+    getAnswersForQuestion: `${BaseURL}/answers`,
+    getAllAnswers: `${BaseURL}/answers`,
   },
 };
