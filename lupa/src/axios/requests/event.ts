@@ -11,7 +11,7 @@ export const getEventByCode = async (
   code: EventCode
 ): Promise<GetEventByCodeDto> => {
   const { data } = await axios.get<
-    AxiosPromise,
+    void,
     Promise<AxiosData<GetEventByCodeDto>>
   >(`${RequestURLs.event.getEventByCode}/${code}`);
   return data;
