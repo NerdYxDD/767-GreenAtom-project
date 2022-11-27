@@ -8,7 +8,7 @@ import { FormForTestService } from './form_for_test.service';
 export class FormForTestController {
   constructor(private readonly formService: FormForTestService) {}
   @UseGuards(JwtAuthGuard)
-  @Post('')
+  @Post('create')
   async createTestSection(
     @Body() form,
     @Request() { user }: { user: JWTPayload },

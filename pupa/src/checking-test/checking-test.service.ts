@@ -17,10 +17,12 @@ export class CheckingTestService {
     result.answers.map((element: Answers) => {
       element.IsRight ? (pointsReceived += 1) : (pointsReceived += 0);
     });
+    console.log(result);
+
     return await this.quizResult.create({
       id: uuidv4(),
       quizId: result.quizId,
-      userid: id,
+      userId: id,
       pointsScored: pointsReceived,
       pointsPossible: result.answers.length,
     });

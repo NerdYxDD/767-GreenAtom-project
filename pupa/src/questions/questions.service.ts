@@ -3,6 +3,7 @@ import { InjectModel } from '@nestjs/sequelize';
 import { v4 as uuidv4 } from 'uuid';
 import { Questions } from 'src/models/questions.models';
 import { QuestionCreate } from 'src/dtos/question.dto';
+import { text } from 'stream/consumers';
 
 @Injectable()
 export class QuestionsService {
@@ -27,7 +28,13 @@ export class QuestionsService {
     return questions;
   }
 
-  async getAnswersByQuestionsId(quizId: string): Promise<Questions[]> {
+  async getQuestionByText(text: string): Promise<Questions> {
+    const questions = await this.question.findOne({ where: { text } });
+
+    return questions;
+  }
+
+  async getQuestionsByQuizId(quizId: string): Promise<Questions[]> {
     const questions = await this.question.findAll({
       where: {
         quizId,

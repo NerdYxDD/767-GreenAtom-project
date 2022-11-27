@@ -73,7 +73,7 @@ export class QuizController {
   ) {
     permissionChecker(user?.roleId);
 
-    return this.quizService.getAllQuizes(eventId);
+    return this.quizService.getQuizes(eventId);
   }
 
   @UseGuards(JwtAuthGuard)

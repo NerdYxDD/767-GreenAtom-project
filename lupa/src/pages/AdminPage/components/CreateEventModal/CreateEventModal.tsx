@@ -1,31 +1,56 @@
 import React, { useState } from 'react';
-import { Modal, Button, Input  } from 'antd';
+import { Modal, Button, Input } from 'antd';
+// @ts-ignore
+import styles from './CreateEventModal.module.scss';
 
-const CreateEventModal: React.FC = () => {
-    const [isModalOpen, setIsModalOpen] = useState(false);
+interface CreateEventModalProps {
+  // eslint-disable-next-line react/no-unused-prop-types
+  onCardAdd(title: string): void;
+}
 
-    const showModal = () => {
-        setIsModalOpen(true);
-    };
+const CreateEventModal: React.FC<CreateEventModalProps> = (props) => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [title, setTitle] = useState<string>('');
 
-    const handleOk = () => {
-        setIsModalOpen(false);
-    };
+  const changeTitle = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setTitle(event.target.value);
+  };
+  const showModal = () => {
+    setIsModalOpen(true);
+  };
 
-    const handleCancel = () => {
-        setIsModalOpen(false);
-    };
-    
-    return (
-        <>
-            <Button type='primary' onClick={showModal}>
-                Создать событие
-            </Button>
-            <Modal title='Создание события' open={isModalOpen} onOk={handleOk} onCancel={handleCancel} >
-                <Input placeholder='Название события' />
-            </Modal>
-        </>
-    );
+  const handleOk = () => {
+    // eslint-disable-next-line react/destructuring-assignment
+    props.onCardAdd(title);
+    setIsModalOpen(false);
+    // setTitle('')
+  };
+
+  const handleCancel = () => {
+    setIsModalOpen(false);
+  };
+
+  return (
+    <>
+      <Button className={styles.Button} type='primary' onClick={showModal}>
+        Создать событие
+      </Button>
+      <Modal
+        title='Создание события'
+        open={isModalOpen}
+        onOk={handleOk}
+        onCancel={handleCancel}
+      >
+        <Input
+          placeholder='Название события'
+          type='text'
+          id='title'
+          onChange={changeTitle}
+          value={title}
+        />
+      </Modal>
+    </>
+  );
 };
 
 export default CreateEventModal;
