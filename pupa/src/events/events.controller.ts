@@ -31,7 +31,7 @@ export class EventsController {
   }
 
   @UseGuards(JwtAuthGuard)
-  @Get(':code')
+  @Get('/getEventByCode/:code')
   getEventListeners(@Param('code') code: string): Promise<FullEvent[]> {
     return this.eventService.getEvent(code);
   }
