@@ -4,22 +4,28 @@ import {
   HttpException,
   HttpStatus,
   Post,
+  Query,
 } from '@nestjs/common';
 
 import { GuestService } from './guest.service';
 
 import { FullGuest, NewGuest } from '../dtos/guest.dto';
 import { AuthService } from '../auth/auth.service';
+import { EventsService } from 'src/events/events.service';
 
 @Controller('guest')
 export class GuestController {
   constructor(
     private readonly guestService: GuestService,
+    private readonly eventService: EventsService,
     private readonly authService: AuthService,
   ) {}
 
-  @Post('/create')
-  async create(@Body() guest: NewGuest): Promise<{ access_token: string }> {
+  @Post('/create/?code')
+  async create(
+    @Query('code') code: string,
+    @Body() guest: NewGuest,
+  ): Promise<{ access_token: string }> {
     if (!guest.email || !guest.username) {
       throw new HttpException(
         'Все поля должны быть заполнены!',
@@ -30,6 +36,7 @@ export class GuestController {
     let resGuest: FullGuest;
 
     const oldGuest = await this.guestService.findGuest(guest.email);
+    const event = await this.eventService.getEvent(code);
 
     if (!oldGuest) {
       const fromDB = await this.guestService.newGuest(guest);
@@ -37,12 +44,14 @@ export class GuestController {
         email: fromDB.email,
         username: fromDB.username,
         id: fromDB.id,
+        eventId: event.id,
       };
     } else {
       resGuest = {
         email: oldGuest.email,
         username: oldGuest.username,
         id: oldGuest.id,
+        eventId: event.id,
       };
     }
 

@@ -35,7 +35,7 @@ export class EventsController {
   getEventListeners(
     @Param('code') code: string,
     @Request() { user }: { user: JWTPayload },
-  ): Promise<FullEvent[]> {
+  ): Promise<FullEvent> {
     permissionChecker(user?.roleId);
     return this.eventService.getEvent(code);
   }

@@ -13,5 +13,6 @@ import { Questions } from '../models/questions.models';
   imports: [SequelizeModule.forFeature([RoomEvent, Quiz, Answers, Questions])],
   controllers: [EventsController],
   providers: [EventsService],
+  exports: [EventsService],
 })
 export class EventsModule {}

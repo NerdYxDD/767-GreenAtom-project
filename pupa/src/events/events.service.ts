@@ -26,8 +26,8 @@ export class EventsService {
     return this.event.findAll({ where: { ownerId: userId } });
   }
 
-  async getEvent(code: string): Promise<FullEvent[]> {
-    return await this.event.findAll({ where: { code } });
+  async getEvent(code: string): Promise<FullEvent> {
+    return await this.event.findOne({ where: { code } });
   }
 
   async getActiveEvent(id: string): Promise<FullEvent[]> {
