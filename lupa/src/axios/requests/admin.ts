@@ -1,5 +1,5 @@
 import axios, { AxiosPromise } from 'axios';
-import { RequestURLs } from '../const';
+import { AccessKey, RequestURLs } from '../const';
 import { AxiosData } from '../../types/types';
 import {
   CreateAdminDto,
@@ -33,7 +33,7 @@ export const getProfile = async (): Promise<CreateAdminDto> => {
   const { data } = await axios.get<
     void,
     Promise<AxiosData<CreateAdminDto>>
-    >(RequestURLs.admin.getMyProfile);
+    >(RequestURLs.admin.getMyProfile, { headers: { 'Authorization': localStorage.getItem(AccessKey) } });
   return data;
 };
 
@@ -41,7 +41,7 @@ export const getAdminEvents = async (): Promise<getEvents[]> => {
   const { data } = await axios.get<
     void,
     Promise<AxiosData<getEvents[]>>
-    >(RequestURLs.admin.getMyEvents);
+    >(RequestURLs.admin.getMyEvents, { headers: { 'Authorization': localStorage.getItem(AccessKey) } });
 
   return data;
 };
@@ -50,7 +50,7 @@ export const delEvents = async (eventId: string): Promise<getEvents[]> => {
   const { data } = await axios.put<
     void,
     Promise<AxiosData<getEvents[]>>
-    >(RequestURLs.admin.delEvents + eventId);
+    >(RequestURLs.admin.delEvents + eventId, {}, { headers: { 'Authorization': localStorage.getItem(AccessKey) } });
 
   return data;
 };

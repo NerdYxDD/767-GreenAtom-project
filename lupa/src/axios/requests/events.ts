@@ -27,6 +27,6 @@ export const createEvent = async (
   const { data } = await axios.post<
     AxiosPromise<CreateEventRbo>,
     Promise<AxiosData<CreateEventDto>>
-  >(RequestURLs.events.createEvent, rbo);
+  >(RequestURLs.events.createEvent, rbo, { headers: { 'Authorization': localStorage.getItem(AccessKey) } });
   return data;
 };
