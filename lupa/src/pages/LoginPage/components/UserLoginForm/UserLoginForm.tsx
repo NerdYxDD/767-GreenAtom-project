@@ -1,4 +1,5 @@
 import React, { useMemo, useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import { Button, Checkbox, Input } from 'antd';
 import { useAppDispatch } from '../../../../redux/hooks/redux.hooks';
 import { guestLoginRequest } from '../../../../redux/reducers/User/user.requests';
@@ -9,7 +10,7 @@ import { emailCheck } from '../../LoginPage';
 interface UserInfo {
   name: string;
   email: string;
-  eventId?: string;
+  eventCode?: string;
   agreement: boolean;
 }
 
@@ -19,11 +20,14 @@ interface UserLoginFormProps {
 
 const UserLoginForm: React.FC<UserLoginFormProps> = ({ changeMode }) => {
   const dispatch = useAppDispatch();
+  const location = useLocation();
+  const eventCodeParams = new URLSearchParams(location.search).get('eventCode');
 
   const [userInfo, setUserInfo] = useState<UserInfo>({
     name: '',
     email: '',
     agreement: false,
+    eventCode: eventCodeParams ?? undefined,
   });
 
   const isValid = useMemo(
@@ -38,6 +42,8 @@ const UserLoginForm: React.FC<UserLoginFormProps> = ({ changeMode }) => {
     setUserInfo((prevState) => ({ ...prevState, [type]: value }));
 
   const login = () => {
+    localStorage.setItem('eventCode', JSON.stringify(userInfo.eventCode));
+
     dispatch(
       guestLoginRequest({ username: userInfo.name, email: userInfo.email })
     );
@@ -53,6 +59,7 @@ const UserLoginForm: React.FC<UserLoginFormProps> = ({ changeMode }) => {
       <div className={styles.Inputs}>
         <Input
           required
+          value={userInfo.name}
           placeholder='Введите никнейм'
           size='middle'
           type='text'
@@ -61,6 +68,7 @@ const UserLoginForm: React.FC<UserLoginFormProps> = ({ changeMode }) => {
 
         <Input
           required
+          value={userInfo.email}
           placeholder='Введите эл. почту'
           size='middle'
           onChange={(event) => changeHandler('email', event.target.value)}
@@ -68,8 +76,9 @@ const UserLoginForm: React.FC<UserLoginFormProps> = ({ changeMode }) => {
 
         <Input
           size='middle'
+          value={userInfo.eventCode}
           placeholder='Введите код комнаты (при наличии)'
-          onChange={(event) => changeHandler('eventId', event.target.value)}
+          onChange={(event) => changeHandler('eventCode', event.target.value)}
         />
 
         <Checkbox

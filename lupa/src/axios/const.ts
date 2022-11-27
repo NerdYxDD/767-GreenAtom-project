@@ -18,8 +18,8 @@ export const RequestURLs = {
     getMyProfile: `${BaseURL}/admin/current`,
   },
   event: {
-    getEventByCode: `${BaseURL}/event`,
-    createEvent: `${BaseURL}/event/create`,
+    getEventByCode: `${BaseURL}/events`,
+    createEvent: `${BaseURL}/events/create`,
   },
   quiz: {
     createQuiz: `${BaseURL}/quiz/create`,

@@ -33,7 +33,7 @@ const App = () => {
               <Route key={one.path} path={one.path} element={one.element} />
             ))}
           {authorized &&
-            !admin.id &&
+            admin.id === '' &&
             guestRoutes.map((one) => (
               <Route key={one.path} path={one.path} element={one.element} />
             ))}

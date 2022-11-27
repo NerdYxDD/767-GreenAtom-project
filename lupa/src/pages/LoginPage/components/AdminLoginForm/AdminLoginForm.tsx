@@ -38,9 +38,9 @@ const AdminLoginForm: React.FC<AdminLoginFormProps> = ({ changeMode }) => {
     }));
 
   const loginAdmin = () => {
-    dispatch(adminLoginRequest(adminInfo));
-    dispatch(getAdminProfile());
-    // dispatch(setAuthorization(true));
+    dispatch(adminLoginRequest(adminInfo)).then(() => {
+      dispatch(getAdminProfile());
+    });
   };
 
   return (
