@@ -20,6 +20,7 @@ export class EventsService {
       code,
       title: event.title,
       ownerId: userId,
+      active: true,
     };
     await this.event.create(newEvent);
     return this.event.findAll({ where: { ownerId: userId } });
