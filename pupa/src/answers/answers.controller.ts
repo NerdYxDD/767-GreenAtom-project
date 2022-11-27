@@ -7,7 +7,6 @@ import {
   Request,
   UseGuards,
 } from '@nestjs/common';
-import { async } from 'rxjs';
 import { JWTPayload } from 'src/auth/auth.types';
 import { permissionChecker } from 'src/auth/auth.utils';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
@@ -34,7 +33,9 @@ export class AnswersController {
   }
 
   @Get('/:questionId')
-  async getAnswerById(@Param('questionId') code: string): Promise<Answers[]> {
-    return await this.answerService.getAllAnswers();
+  async getAnswerById(@Param('questionId') questionId: string): Promise<Answers[]> {
+    console.log(questionId);
+    
+    return await this.answerService.getAnswersByQuestionsId(questionId);
   }
 }
