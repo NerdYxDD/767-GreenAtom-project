@@ -56,13 +56,17 @@ export const userSlice = createSlice({
       .addCase(guestLoginRequest.pending, (state) => {
         state.isLoading = true;
       })
-      .addCase(guestLoginRequest.fulfilled, (state) => {
+      .addCase(guestLoginRequest.fulfilled, (state, action) => {
         state.isLoading = false;
         state.authorized = true;
         state.error = '';
         localStorage.setItem(
           AUTHORIZATION_KEY,
           JSON.stringify(state.authorized)
+        );
+        localStorage.setItem(
+          AccessKey,
+          JSON.stringify(action.payload.access_token)
         );
         localStorage.setItem(ADMIN_PROFILE, JSON.stringify(clearAdmin));
         state.admin = clearAdmin;
