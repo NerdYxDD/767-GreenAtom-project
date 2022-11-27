@@ -13,6 +13,14 @@ const userFromStorage: CreateAdminDto | null = JSON.parse(
   localStorage.getItem(ADMIN_PROFILE) ?? 'null'
 );
 
+const clearAdmin = {
+  id: '',
+  email: '',
+  firstName: '',
+  lastName: '',
+  username: '',
+};
+
 const initialAdmin = {
   id: userFromStorage?.id ?? '',
   email: userFromStorage?.email ?? '',
@@ -56,6 +64,8 @@ export const userSlice = createSlice({
           AUTHORIZATION_KEY,
           JSON.stringify(state.authorized)
         );
+        localStorage.setItem(ADMIN_PROFILE, JSON.stringify(clearAdmin));
+        state.admin = clearAdmin;
       })
       .addCase(guestLoginRequest.rejected, (state, action) => {
         state.isLoading = false;
