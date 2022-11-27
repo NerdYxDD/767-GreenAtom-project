@@ -50,7 +50,7 @@ export const delEvents = async (eventId: string): Promise<getEvents[]> => {
   const { data } = await axios.put<
     void,
     Promise<AxiosData<getEvents[]>>
-    >(RequestURLs.admin.delEvents + eventId);
+    >(RequestURLs.admin.delEvents + eventId, {}, { headers: { 'Authorization': localStorage.getItem(AccessKey) } });
 
   return data;
 };

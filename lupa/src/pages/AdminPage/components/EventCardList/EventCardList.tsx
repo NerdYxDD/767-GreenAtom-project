@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Card, List, Modal } from 'antd';
+import { Button, Card, List } from 'antd';
 // eslint-disable-next-line import/extensions
 // eslint-disable-next-line import/extensions,import/no-extraneous-dependencies
 import { DeleteOutlined } from '@ant-design/icons';
@@ -7,6 +7,7 @@ import { DeleteOutlined } from '@ant-design/icons';
 import styles from './EventCardList.module.scss';
 import StatisticsModal from '../StatisticsModal/StatisticsModal';
 import { CustomEvent } from '../../../../types/types';
+import EditEventModal from '../EditEventModal/EditEventModal'
 
 type EventCardListProps = {
   cards: CustomEvent[];
@@ -39,6 +40,7 @@ export const EventCardList: React.FC<EventCardListProps> = ({
             <Card className={styles.Card}>
               <span className={styles.Title}>{card.title}</span>
               <div className={styles.EditButton}>
+                <EditEventModal />
                 <Button
                   type='primary'
                   danger
