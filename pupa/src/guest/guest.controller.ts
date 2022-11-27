@@ -22,41 +22,49 @@ export class GuestController {
     private readonly authService: AuthService,
   ) {}
 
-
   @Post('/create?')
-  async create(
-    @Query('code') code: string,
-    @Body() guest: NewGuest,
-  ): Promise<{ access_token: string }> {
-    if (!guest.email || !guest.username) {
-      throw new HttpException(
-        'Все поля должны быть заполнены!',
-        HttpStatus.UNAUTHORIZED,
-      );
+  async create(@Query('code') code: string, @Body() guest: NewGuest) {
+    try {
+      if (!guest.email || !guest.username) {
+        throw new HttpException(
+          'Все поля должны быть заполнены!',
+          HttpStatus.UNAUTHORIZED,
+        );
+      }
+
+      let resGuest: FullGuest;
+
+      const oldGuest = await this.guestService.findGuest(guest.email);
+      const event = await this.eventService.getEvent(code);
+
+      if (!oldGuest) {
+        const fromDB = await this.guestService.newGuest(guest);
+        resGuest = {
+          email: fromDB.email,
+          username: fromDB.username,
+          id: fromDB.id,
+        };
+      } else {
+        resGuest = {
+          email: oldGuest.email,
+          username: oldGuest.username,
+          id: oldGuest.id,
+        };
+      }
+      const token = await this.authService.newGuestToken({ ...resGuest });
+
+      if (code) {
+        const eventId = event.id;
+
+        const result = {
+          token,
+          event: eventId,
+        };
+
+        return result;
+      } else return token;
+    } catch (error) {
+      throw new HttpException(`${error}`, HttpStatus.BAD_REQUEST);
     }
-
-    let resGuest: FullGuest;
-
-    const oldGuest = await this.guestService.findGuest(guest.email);
-    const event = await this.eventService.getEvent(code);
-
-    if (!oldGuest) {
-      const fromDB = await this.guestService.newGuest(guest);
-      resGuest = {
-        email: fromDB.email,
-        username: fromDB.username,
-        id: fromDB.id,
-        eventId: event.id,
-      };
-    } else {
-      resGuest = {
-        email: oldGuest.email,
-        username: oldGuest.username,
-        id: oldGuest.id,
-        eventId: event.id,
-      };
-    }
-
-    return this.authService.newGuestToken({ ...resGuest });
   }
 }

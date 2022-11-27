@@ -11,10 +11,6 @@ class Guest {
 
   @IsNotEmpty()
   readonly username: string;
-
-  @IsNotEmpty()
-  @IsUUID(4)
-  readonly eventId?: string;
 }
 
 export type FullGuest = Guest;

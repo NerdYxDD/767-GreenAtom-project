@@ -23,7 +23,7 @@ export class EventsService {
       active: true,
     };
     await this.event.create(newEvent);
-    return this.event.findAll({ where: { ownerId: userId } });
+    return this.event.findAll({ where: { ownerId: userId, active: true } });
   }
 
   async getEvent(code: string): Promise<FullEvent> {
