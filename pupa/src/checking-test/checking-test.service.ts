@@ -19,7 +19,7 @@ export class CheckingTestService {
     });
     return await this.quizResult.create({
       id: uuidv4(),
-      quizId: result.quizeId,
+      quizId: result.quizId,
       userid: id,
       pointsScored: pointsReceived,
       pointsPossible: result.answers.length,
