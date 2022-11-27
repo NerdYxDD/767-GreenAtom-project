@@ -1,10 +1,24 @@
+import { IsEmail, IsNotEmpty, IsUUID } from 'class-validator';
+
 class Admin {
+  @IsUUID(4)
   id: string;
+  
+  @IsNotEmpty()
+  @IsEmail()
   email: string;
+
+  @IsNotEmpty()
   firstName: string;
   lastName: string;
+
+  @IsNotEmpty()
   password: string;
+
+  @IsNotEmpty()
   username: string;
+
+  @IsNotEmpty()
   role: number;
 }
 

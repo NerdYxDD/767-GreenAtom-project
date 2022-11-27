@@ -21,7 +21,7 @@ export class AnswersController {
   @Post('/create')
   async createAnswer(
     @Body() answer: AnswerCreate,
-    @Request() user: JWTPayload,
+    @Request() { user }: { user: JWTPayload },
   ) {
     permissionChecker(user?.roleId);
     return await this.answerService.create(answer);
@@ -33,9 +33,11 @@ export class AnswersController {
   }
 
   @Get('/:questionId')
-  async getAnswerById(@Param('questionId') questionId: string): Promise<Answers[]> {
+  async getAnswerById(
+    @Param('questionId') questionId: string,
+  ): Promise<Answers[]> {
     console.log(questionId);
-    
+
     return await this.answerService.getAnswersByQuestionsId(questionId);
   }
 }

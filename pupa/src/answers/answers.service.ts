@@ -38,14 +38,14 @@ export class AnswersService {
     return answers;
   }
 
-//   async changeAnswer(data, id: string): Promise<Answers> {
-//     const updateAnswer = await this.answers.update(
-//       {
-//         ...data,
-//       },
-//       { where: { id } },
-//     );
+  //   async changeAnswer(data, id: string): Promise<Answers> {
+  //     const updateAnswer = await this.answers.update(
+  //       {
+  //         ...data,
+  //       },
+  //       { where: { id } },
+  //     );
 
-//     return updateAnswer;
-//   }
+  //     return updateAnswer;
+  //   }
 }

@@ -31,8 +31,13 @@ export class EventsController {
   }
 
   @UseGuards(JwtAuthGuard)
-  @Get('/getEventByCode/:code')
-  getEventListeners(@Param('code') code: string): Promise<FullEvent[]> {
+  @Get(':code')
+  getEventListeners(
+    @Param('code') code: string,
+    @Request() { user }: { user: JWTPayload },
+  ): Promise<FullEvent> {
+    permissionChecker(user?.roleId);
+    
     return this.eventService.getEvent(code);
   }
 

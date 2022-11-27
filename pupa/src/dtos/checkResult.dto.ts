@@ -1,11 +1,14 @@
+import { IsArray, IsNotEmpty, IsUUID } from 'class-validator';
+import { AnswerCreate } from './answer.dto';
+
 export class ResultDto {
-  readonly userId: string;
+
+  @IsNotEmpty()
+  @IsUUID(4)
   readonly quizId: string;
-  readonly answers: Answer[];
+
+  @IsArray()
+  readonly answers: AnswerCreate[];
 }
 
-class Answer {
-  IsRight: boolean;
-  text: string;
-  questionId: string;
-}
+

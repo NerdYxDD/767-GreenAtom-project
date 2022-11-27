@@ -3,7 +3,6 @@ import { JWTPayload } from 'src/auth/auth.types';
 import { permissionChecker } from 'src/auth/auth.utils';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 import { ResultDto } from 'src/dtos/checkResult.dto';
-import { FullEvent } from 'src/dtos/event.dto';
 import { QuizResult } from 'src/models/quizResult';
 import { CheckingTestService } from './checking-test.service';
 
