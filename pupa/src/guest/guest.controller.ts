@@ -21,7 +21,7 @@ export class GuestController {
     private readonly authService: AuthService,
   ) {}
 
-  @Post('/create/?code')
+  @Post('/create?')
   async create(
     @Query('code') code: string,
     @Body() guest: NewGuest,
