@@ -2,6 +2,7 @@ export interface AxiosData<T> {
   data: T;
 }
 
+export type EventId = string;
 export type EventCode = string;
 export type QuizId = string;
 export type QuestionId = string;

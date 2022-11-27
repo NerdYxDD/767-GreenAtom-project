@@ -45,7 +45,10 @@ const UserLoginForm: React.FC<UserLoginFormProps> = ({ changeMode }) => {
     localStorage.setItem('eventCode', JSON.stringify(userInfo.eventCode));
 
     dispatch(
-      guestLoginRequest({ username: userInfo.name, email: userInfo.email })
+      guestLoginRequest({
+        rbo: { username: userInfo.name, email: userInfo.email },
+        eventCode: userInfo.eventCode,
+      })
     );
   };
 

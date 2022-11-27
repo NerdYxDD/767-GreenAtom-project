@@ -8,13 +8,14 @@ import { AccessKey, RequestURLs } from '../const';
 import { AxiosData, EventCode } from '../../types/types';
 
 export const getEventByCode = async (
-  code: EventCode
+  eventCode: EventCode
 ): Promise<GetEventByCodeDto> => {
   const { data } = await axios.get<void, Promise<AxiosData<GetEventByCodeDto>>>(
-    `${RequestURLs.events.getEventByCode}/${code}`,
+    `${RequestURLs.events.getEventByCode}/${eventCode}`,
     {
       headers: {
-        Authorization: localStorage.getItem(AccessKey),
+        Authorization:
+          'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkdvZCIsInN1YiI6IjZjNjcyMWM3LWEyODEtNGE1Yy04NzEyLTU5NDAwZmJjZDkyNiIsImVtYWlsIjoic2hpdEBsb2xAbWFpbC5ydSIsInJvbGVJZCI6MSwicm9sZU5hbWUiOiJhZG1pbiIsImlhdCI6MTY2OTQ5NDQyNSwiZXhwIjoxNjY5NTMwNDI1fQ.EIXDVs6OIUG5DNzXlk3srW416Ic8lt0b6xlLQ19_h6c',
       },
     }
   );

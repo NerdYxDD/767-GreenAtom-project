@@ -10,7 +10,7 @@ axios.defaults.headers.common.Authorization = `${localStorage.getItem(
 
 export const RequestURLs = {
   guest: {
-    create: `${BaseURL}/guest/create`,
+    create: `${BaseURL}/guest/create?code`,
   },
   admin: {
     create: `${BaseURL}/admin/create`,
@@ -20,11 +20,12 @@ export const RequestURLs = {
     delEvents: `${BaseURL}/events/changeStatus/`,
   },
   events: {
-    getEventByCode: `${BaseURL}/events`,
+    getEventByCode: `${BaseURL}/events/getEventByCode`,
     createEvent: `${BaseURL}/events/create`,
   },
   quiz: {
     createQuiz: `${BaseURL}/quiz/create`,
+    getQuizsByEventId: `${BaseURL}/quiz/getByEventId`,
   },
   questions: {
     getQuestionsByQuizId: `${BaseURL}/questions`,

@@ -9,14 +9,15 @@ import {
   LoginAdminRbo,
 } from '../../../types/admin';
 import { getProfile, loginAdmin } from '../../../axios/requests/admin';
+import { EventCode } from '../../../types/types';
 
 export const guestLoginRequest = createAsyncThunk<
   CreateGuestDto,
-  CreateGuestRbo,
+  { rbo: CreateGuestRbo; eventCode?: EventCode },
   { rejectValue: string }
->('guest/login', async (data, { rejectWithValue }) => {
+>('guest/login', async ({ eventCode, rbo }, { rejectWithValue }) => {
   try {
-    return await createGuest(data);
+    return await createGuest(rbo, eventCode);
   } catch (e: any) {
     return rejectWithValue(e?.response?.data.message ?? 'unknown');
   }
