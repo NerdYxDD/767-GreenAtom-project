@@ -36,8 +36,6 @@ export class AnswersController {
   async getAnswerById(
     @Param('questionId') questionId: string,
   ): Promise<Answers[]> {
-    console.log(questionId);
-
     return await this.answerService.getAnswersByQuestionsId(questionId);
   }
 }

@@ -1,6 +1,15 @@
+import { IsNotEmpty, IsUUID } from 'class-validator';
+
 class Quiz {
+  @IsNotEmpty()
+  @IsUUID(4)
   readonly id: string;
+
+  @IsNotEmpty()
   readonly title: string;
+
+  @IsNotEmpty()
+  @IsUUID(4)
   readonly eventId: string;
 }
 

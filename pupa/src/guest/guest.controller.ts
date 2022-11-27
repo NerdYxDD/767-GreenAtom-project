@@ -1,6 +1,7 @@
 import {
   Body,
   Controller,
+  Get,
   HttpException,
   HttpStatus,
   Post,
@@ -21,11 +22,13 @@ export class GuestController {
     private readonly authService: AuthService,
   ) {}
 
-  @Post('/create/?code')
-  async create(
-    @Query('code') code: string,
-    @Body() guest: NewGuest,
-  ): Promise<{ access_token: string }> {
+  @Get('')
+  async get() {
+    return 123;
+  }
+
+  @Post('/create?')
+  async create(@Query('code') code: string, @Body() guest: NewGuest) {
     if (!guest.email || !guest.username) {
       throw new HttpException(
         'Все поля должны быть заполнены!',
