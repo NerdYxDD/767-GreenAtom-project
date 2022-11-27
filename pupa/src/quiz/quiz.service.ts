@@ -3,11 +3,11 @@ import { InjectModel } from '@nestjs/sequelize';
 import { v4 as uuidv4 } from 'uuid';
 
 import { Quiz } from '../models/quiz.model';
+import { RoomEvent } from '../models/event.model';
+import { GuestQuiz } from '../models/guest_quize.model';
 
 import { FullQuiz, QuizWtId } from '../dtos/quiz.dto';
-import { RoomEvent } from '../models/event.model';
 import { FullEvent } from '../dtos/event.dto';
-import { GuestQuiz } from '../models/guest_quize.model';
 
 @Injectable()
 export class QuizService {
@@ -35,10 +35,6 @@ export class QuizService {
     return await this.event.findOne({ where: { id } });
   }
 
-  async getQuizes(id: string): Promise<FullQuiz[]> {
-    return await this.quiz.findAll({ where: { eventId: id } });
-  }
-
   async findQuiz(id: string): Promise<FullQuiz | null> {
     return await this.quiz.findOne({ where: { id } });
   }
@@ -52,5 +48,16 @@ export class QuizService {
       where: { userId },
       include: { model: Quiz },
     });
+  }
+
+  async getOldQuizes(ownerId: string) {
+    const eventsWithQuiz = await this.event.findAll({
+      where: { ownerId },
+      include: { model: Quiz, required: true },
+    });
+
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    return eventsWithQuiz.reduce((a, b) => a.concat(b.quiz), []);
   }
 }

@@ -66,14 +66,21 @@ export class QuizController {
   }
 
   @UseGuards(JwtAuthGuard)
-  @Get('/:eventId')
+  @Get('/getByEventId/:eventId')
   async getElementId(
     @Param('eventId') eventId: string,
     @Request() { user }: { user: JWTPayload },
   ) {
     permissionChecker(user?.roleId);
 
-    console.log(eventId);
-    return this.quizService.getQuizes(eventId);
+    return this.quizService.getAllQuizes(eventId);
+  }
+
+  @UseGuards(JwtAuthGuard)
+  @Get('/elderOnes')
+  async getElderOnes(@Request() { user }: { user: JWTPayload }) {
+    permissionChecker(user?.roleId);
+
+    return this.quizService.getOldQuizes(user.sub);
   }
 }
