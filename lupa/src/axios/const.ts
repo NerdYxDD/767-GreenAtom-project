@@ -4,7 +4,7 @@ const BaseURL = 'http://45.86.182.135:8000';
 export const AccessKey = 'ACCESS_KEY';
 
 axios.defaults.headers.common['Content-Type'] = 'application/json';
-axios.defaults.headers.common.Authorization = `Bearer ${localStorage.getItem(
+axios.defaults.headers.common.Authorization = `${localStorage.getItem(
   AccessKey
 )}`;
 
