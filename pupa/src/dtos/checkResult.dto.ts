@@ -1,6 +1,6 @@
 export class ResultDto {
   readonly userId: string;
-  readonly quizeId: string;
+  readonly quizId: string;
   readonly answers: Answer[];
 }
 

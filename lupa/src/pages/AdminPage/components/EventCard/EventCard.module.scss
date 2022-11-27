@@ -14,3 +14,9 @@
   inline-size: 300px;
   overflow-wrap: break-word;
 }
+
+.EditButton {
+  margin-top: 8px;
+  display: flex;
+  justify-content: space-between;
+}

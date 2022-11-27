@@ -9,7 +9,10 @@ export class FormForTestController {
   constructor(private readonly formService: FormForTestService) {}
   @UseGuards(JwtAuthGuard)
   @Post('')
-  async createTestSection(@Body() form, @Request() user: JWTPayload) {
+  async createTestSection(
+    @Body() form,
+    @Request() { user }: { user: JWTPayload },
+  ) {
     permissionChecker(user?.roleId);
     return await this.formService.create(form);
   }

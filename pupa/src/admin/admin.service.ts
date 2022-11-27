@@ -12,8 +12,8 @@ import {
   FullAdmin,
   FullRole,
   NewAdmin,
+  NewCreatedUser,
 } from '../dtos/admin.dto';
-import { where } from 'sequelize';
 
 @Injectable()
 export class AdminService {
@@ -24,7 +24,7 @@ export class AdminService {
     private readonly role: typeof Role,
   ) {}
 
-  async create(admin: NewAdmin): Promise<FullAdmin> {
+  async create(admin: NewAdmin): Promise<NewCreatedUser> {
     const { password, ...rest } = admin;
     const checkAdmin = await this.admin.findOne({
       where: { email: rest.email },
@@ -37,12 +37,15 @@ export class AdminService {
       );
     }
 
-    return this.admin.create({
-      id: uuidv4(),
-      password: hashPassword(password),
-      role: 1,
-      ...rest,
-    });
+    const { id, username, email, firstName, lastName } =
+      await this.admin.create({
+        id: uuidv4(),
+        password: hashPassword(password),
+        role: 1,
+        ...rest,
+      });
+
+    return { id, username, email, firstName, lastName };
   }
 
   async findOneAdmin(email: string): Promise<FullAdmin> {

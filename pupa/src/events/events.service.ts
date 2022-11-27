@@ -13,7 +13,7 @@ export class EventsService {
     private readonly event: typeof RoomEvent,
   ) {}
 
-  async createEvent(event: CreateEvent, userId: string): Promise<FullEvent> {
+  async createEvent(event: CreateEvent, userId: string): Promise<FullEvent[]> {
     const code = Date.now().toString(36).slice(2, 8);
     const newEvent = {
       id: uuidv4(),
@@ -21,7 +21,8 @@ export class EventsService {
       title: event.title,
       ownerId: userId,
     };
-    return await this.event.create(newEvent);
+    await this.event.create(newEvent);
+    return this.event.findAll({ where: { ownerId: userId } });
   }
 
   async getEvent(code: string): Promise<FullEvent[]> {
@@ -35,7 +36,7 @@ export class EventsService {
       },
     });
   }
-  async changeStatus(id: string): Promise<FullEvent> {
+  async changeStatus(id: string, userId: string): Promise<FullEvent[]> {
     await this.event.update(
       {
         active: false,
@@ -43,6 +44,6 @@ export class EventsService {
       { where: { id } },
     );
 
-    return await this.event.findOne({ where: { id } });
+    return await this.event.findAll({ where: { ownerId: userId } });
   }
 }
