@@ -7,6 +7,7 @@ import {
   LoginAdminDto,
   LoginAdminRbo,
 } from '../../types/admin';
+import { getEvents } from '../../types/events';
 
 export const createAdmin = async (
   rbo: CreateAdminRbo
@@ -33,5 +34,23 @@ export const getProfile = async (): Promise<CreateAdminDto> => {
     void,
     Promise<AxiosData<CreateAdminDto>>
     >(RequestURLs.admin.getMyProfile);
+  return data;
+};
+
+export const getAdminEvents = async (): Promise<getEvents[]> => {
+  const { data } = await axios.get<
+    void,
+    Promise<AxiosData<getEvents[]>>
+    >(RequestURLs.admin.getMyEvents);
+
+  return data;
+};
+
+export const delEvents = async (eventId: string): Promise<getEvents[]> => {
+  const { data } = await axios.put<
+    void,
+    Promise<AxiosData<getEvents[]>>
+    >(RequestURLs.admin.delEvents + eventId);
+
   return data;
 };
