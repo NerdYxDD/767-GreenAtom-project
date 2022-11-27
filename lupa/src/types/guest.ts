@@ -5,4 +5,5 @@ export interface CreateGuestRbo {
 
 export interface CreateGuestDto {
   access_token: string;
+  eventId?: string;
 }
