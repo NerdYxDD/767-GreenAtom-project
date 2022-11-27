@@ -22,13 +22,12 @@ export class GuestController {
     private readonly authService: AuthService,
   ) {}
 
-  @Get('')
-  async get() {
-    return 123;
-  }
 
   @Post('/create?')
-  async create(@Query('code') code: string, @Body() guest: NewGuest) {
+  async create(
+    @Query('code') code: string,
+    @Body() guest: NewGuest,
+  ): Promise<{ access_token: string }> {
     if (!guest.email || !guest.username) {
       throw new HttpException(
         'Все поля должны быть заполнены!',
