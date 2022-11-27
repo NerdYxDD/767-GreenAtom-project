@@ -57,8 +57,8 @@ export class GuestController {
         const eventId = event.id;
 
         const result = {
-          token,
-          event: eventId,
+          token: token.access_token,
+          eventId,
         };
 
         return result;
