@@ -4,16 +4,20 @@ import {
   CreateEventRbo,
   GetEventByCodeDto,
 } from '../../types/event';
-import { RequestURLs } from '../const';
+import { AccessKey, RequestURLs } from '../const';
 import { AxiosData, EventCode } from '../../types/types';
 
 export const getEventByCode = async (
   code: EventCode
 ): Promise<GetEventByCodeDto> => {
-  const { data } = await axios.get<
-    void,
-    Promise<AxiosData<GetEventByCodeDto>>
-  >(`${RequestURLs.event.getEventByCode}/${code}`);
+  const { data } = await axios.get<void, Promise<AxiosData<GetEventByCodeDto>>>(
+    `${RequestURLs.event.getEventByCode}/${code}`,
+    {
+      headers: {
+        Authorization: localStorage.getItem(AccessKey),
+      },
+    }
+  );
   return data;
 };
 
