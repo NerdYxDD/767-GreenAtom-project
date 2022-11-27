@@ -45,6 +45,6 @@ export class EventsService {
       { where: { id } },
     );
 
-    return await this.event.findAll({ where: { ownerId: userId } });
+    return await this.event.findAll({ where: { active: true } });
   }
 }
