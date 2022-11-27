@@ -86,9 +86,11 @@ export const userSlice = createSlice({
         state.error = '';
         localStorage.setItem(ADMIN_PROFILE, JSON.stringify(action.payload));
         state.admin = action.payload;
+        state.authorized = true
       })
       .addCase(getAdminProfile.rejected, (state, action) => {
         state.isLoading = false;
+        state.authorized = false;
         state.error = action.payload ?? '';
         state.admin = initialAdmin;
       });
@@ -101,6 +103,10 @@ export const userSlice = createSlice({
         state.isLoading = false;
         state.authorized = true;
         state.error = '';
+        localStorage.setItem(
+          AUTHORIZATION_KEY,
+          JSON.stringify(true)
+        );
         localStorage.setItem(AccessKey, action.payload.access_token);
       })
       .addCase(adminLoginRequest.rejected, (state, action) => {
