@@ -3,6 +3,8 @@ export interface AxiosData<T> {
 }
 
 export type EventCode = string;
+export type QuizId = string;
+export type QuestionId = string;
 
 export interface Event {
   id: string;
@@ -16,4 +18,17 @@ export interface Quiz {
   id: string;
   title: string;
   eventId: string;
+}
+
+export interface Question {
+  id: string;
+  text: string;
+  quizId: QuizId;
+}
+
+export interface Answer {
+  id: string;
+  text: string;
+  questionId: QuestionId;
+  isRight: boolean;
 }

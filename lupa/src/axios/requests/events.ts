@@ -3,7 +3,7 @@ import {
   CreateEventDto,
   CreateEventRbo,
   GetEventByCodeDto,
-} from '../../types/event';
+} from '../../types/events';
 import { AccessKey, RequestURLs } from '../const';
 import { AxiosData, EventCode } from '../../types/types';
 
@@ -11,7 +11,7 @@ export const getEventByCode = async (
   code: EventCode
 ): Promise<GetEventByCodeDto> => {
   const { data } = await axios.get<void, Promise<AxiosData<GetEventByCodeDto>>>(
-    `${RequestURLs.event.getEventByCode}/${code}`,
+    `${RequestURLs.events.getEventByCode}/${code}`,
     {
       headers: {
         Authorization: localStorage.getItem(AccessKey),
@@ -27,6 +27,6 @@ export const createEvent = async (
   const { data } = await axios.post<
     AxiosPromise<CreateEventRbo>,
     Promise<AxiosData<CreateEventDto>>
-  >(RequestURLs.event.createEvent, rbo);
+  >(RequestURLs.events.createEvent, rbo);
   return data;
 };
