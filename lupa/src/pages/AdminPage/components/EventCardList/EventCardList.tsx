@@ -1,36 +1,28 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Button, Card, List, Modal } from 'antd';
 // eslint-disable-next-line import/extensions
 // eslint-disable-next-line import/extensions,import/no-extraneous-dependencies
 import { DeleteOutlined } from '@ant-design/icons';
-// eslint-disable-next-line import/no-extraneous-dependencies
-import { ICard } from './interfaces';
 // @ts-ignore
 import styles from './EventCardList.module.scss';
 import StatisticsModal from '../StatisticsModal/StatisticsModal';
-import EditEventModal from '../EditEventModal/EditEventModal';
+import { CustomEvent } from '../../../../types/types';
 
 type EventCardListProps = {
+  cards: CustomEvent[];
   // eslint-disable-next-line react/no-unused-prop-types
-  cards: ICard[];
-  // eslint-disable-next-line react/no-unused-prop-types
-  onRemove: (id: number) => void;
+  onRemove: (id: string) => void;
 };
 
 export const EventCardList: React.FC<EventCardListProps> = ({
   cards,
-  onRemove, }) => {
-  const [quizList, setQuizList] = useState([{
-    id: 'id',
-    name: 'name'
-
-  }]);
-
+  onRemove,
+}) => {
   if (cards.length === 0) {
     return <p className={styles.Center}>Событий пока нет!</p>;
   }
 
-  const removeHandler = (event: React.MouseEvent, id: number) => {
+  const removeHandler = (event: React.MouseEvent, id: string) => {
     event.preventDefault();
     onRemove(id);
   };
@@ -39,7 +31,7 @@ export const EventCardList: React.FC<EventCardListProps> = ({
     <ul>
       {cards.map((card) => {
         const classes = ['card'];
-        if (card.deleted) {
+        if (!card.active) {
           classes.push('deleted');
         }
         return (
@@ -52,9 +44,7 @@ export const EventCardList: React.FC<EventCardListProps> = ({
                   danger
                   onClick={(event) => removeHandler(event, card.id)}
                   icon={<DeleteOutlined />}
-                  className={styles.Button}
                 />
-                <EditEventModal />
               </div>
             </Card>
             <StatisticsModal />

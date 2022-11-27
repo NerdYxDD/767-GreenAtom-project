@@ -1,38 +1,41 @@
-import React, { useState } from 'react';
-import { Button } from 'antd';
+import React, { useEffect } from 'react';
 import { EventCardList } from './components/EventCardList/EventCardList';
 import CreateEventModal from './components/CreateEventModal/CreateEventModal';
-import { ICard } from './components/EventCardList/interfaces';
 // @ts-ignore
 import styles from './AdminPage.module.scss';
+import { useAppDispatch, useAppSelector } from '../../redux/hooks/redux.hooks';
+import { eventSelector } from '../../redux/selectors/event.selector';
+import { createEventThunk, delEventThunk, getAdminEventsThunk } from '../../redux/reducers/Event/event.requests';
 
 const AdminPage = () => {
-  const [cards, setCards] = useState<ICard[]>([]);
+  const dispatch = useAppDispatch();
+
+  const { adminEvents } = useAppSelector(eventSelector);
+
 
   const addCardHandler = (title: string) => {
-    const newEvent: ICard = {
-      title,
-      id: Date.now(),
-      deleted: false,
-    };
-    setCards((prevState) => [newEvent, ...prevState]);
+    dispatch(createEventThunk(title))
   };
 
-  const removeHandler = (id: number) => {
+  const removeHandler = (id: string) => {
     const shouldRemove = window.confirm(
       'Вы уверены, что хотите удалить событие?'
     );
     if (shouldRemove) {
-      setCards((prevState) => prevState.filter((card) => card.id !== id));
+      dispatch(delEventThunk(id))
     }
   };
+
+  useEffect(() => {
+    dispatch(getAdminEventsThunk())
+  }, [])
 
   return (
     <div className={styles.AdminPageContainer}>
       <div>
         <CreateEventModal onCardAdd={addCardHandler} />
       </div>
-      <EventCardList cards={cards} onRemove={removeHandler} />
+      <EventCardList cards={adminEvents} onRemove={removeHandler} />
     </div>
   );
 };
