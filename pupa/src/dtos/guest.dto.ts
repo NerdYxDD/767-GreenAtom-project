@@ -1,7 +1,19 @@
+import { IsEmail, IsNotEmpty, IsUUID } from 'class-validator';
+
 class Guest {
+  @IsNotEmpty()
+  @IsUUID(4)
   readonly id: string;
+
+  @IsNotEmpty()
+  @IsEmail()
   readonly email: string;
+
+  @IsNotEmpty()
   readonly username: string;
+
+  @IsNotEmpty()
+  @IsUUID(4)
   readonly eventId?: string;
 }
 

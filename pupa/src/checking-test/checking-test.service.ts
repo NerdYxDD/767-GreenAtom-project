@@ -14,12 +14,10 @@ export class CheckingTestService {
   ) {}
   async getResult(result: ResultDto, id: string): Promise<QuizResult> {
     let pointsReceived = 0;
-    console.log(id);
 
     result.answers.map((element: Answers) => {
       element.IsRight ? (pointsReceived += 1) : (pointsReceived += 0);
     });
-    console.log(result);
 
     return await this.quizResult.create({
       id: uuidv4(),

@@ -1,6 +1,7 @@
 import {
   Body,
   Controller,
+  Get,
   HttpException,
   HttpStatus,
   Post,
@@ -20,6 +21,7 @@ export class GuestController {
     private readonly eventService: EventsService,
     private readonly authService: AuthService,
   ) {}
+
 
   @Post('/create?')
   async create(
