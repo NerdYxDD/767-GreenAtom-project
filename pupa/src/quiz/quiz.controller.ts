@@ -42,7 +42,6 @@ export class QuizController {
     return this.quizService.createQuiz(quiz);
   }
 
-  // something here is wrong
   @UseGuards(JwtAuthGuard)
   @Post('/pass')
   async passedQuiz(
@@ -67,12 +66,7 @@ export class QuizController {
 
   @UseGuards(JwtAuthGuard)
   @Get('/getByEventId/:eventId')
-  async getElementId(
-    @Param('eventId') eventId: string,
-    @Request() { user }: { user: JWTPayload },
-  ) {
-    permissionChecker(user?.roleId);
-
+  async getElementId(@Param('eventId') eventId: string) {
     return this.quizService.getQuizes(eventId);
   }
 
