@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Button, Card, List, Modal } from 'antd';
 // eslint-disable-next-line import/extensions
 // eslint-disable-next-line import/extensions,import/no-extraneous-dependencies
@@ -8,6 +8,7 @@ import { ICard } from './interfaces';
 // @ts-ignore
 import styles from './EventCardList.module.scss';
 import StatisticsModal from '../StatisticsModal/StatisticsModal';
+import EditEventModal from '../EditEventModal/EditEventModal';
 
 type EventCardListProps = {
   // eslint-disable-next-line react/no-unused-prop-types
@@ -18,8 +19,13 @@ type EventCardListProps = {
 
 export const EventCardList: React.FC<EventCardListProps> = ({
   cards,
-  onRemove,
-}) => {
+  onRemove, }) => {
+  const [quizList, setQuizList] = useState([{
+    id: 'id',
+    name: 'name'
+
+  }]);
+
   if (cards.length === 0) {
     return <p className={styles.Center}>Событий пока нет!</p>;
   }
@@ -46,7 +52,9 @@ export const EventCardList: React.FC<EventCardListProps> = ({
                   danger
                   onClick={(event) => removeHandler(event, card.id)}
                   icon={<DeleteOutlined />}
+                  className={styles.Button}
                 />
+                <EditEventModal />
               </div>
             </Card>
             <StatisticsModal />

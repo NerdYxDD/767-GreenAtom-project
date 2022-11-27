@@ -6,24 +6,12 @@ import { EditOutlined } from '@ant-design/icons';
 import styles from './EditQuizModal.module.scss';
 
 interface QuizCardAdminProps {
-  name: string;
+  name: string
 }
 
 const EditQuizModal: React.FC<QuizCardAdminProps> = ({ name }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [quizName, setQuizName] = useState(name);
-
-  const [questions, setQuestions] = useState([
-    {
-      text: '',
-      answers: [
-        {
-          text: '',
-          isRight: false,
-        },
-      ],
-    },
-  ]);
 
   const showModal = () => {
     setIsModalOpen(true);
