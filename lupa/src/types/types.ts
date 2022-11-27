@@ -6,7 +6,7 @@ export type EventCode = string;
 export type QuizId = string;
 export type QuestionId = string;
 
-export interface Event {
+export interface CustomEvent {
   id: string;
   title: string;
   code: EventCode;

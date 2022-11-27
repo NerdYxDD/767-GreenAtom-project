@@ -16,6 +16,8 @@ export const RequestURLs = {
     create: `${BaseURL}/admin/create`,
     login: `${BaseURL}/admin/login`,
     getMyProfile: `${BaseURL}/admin/current`,
+    getMyEvents: `${BaseURL}/events/active-events`,
+    delEvents: `${BaseURL}/events/changeStatus/`,
   },
   events: {
     getEventByCode: `${BaseURL}/events`,
